@@ -72,13 +72,14 @@ def print_with_delay(text, delay=0.005):
         sys.stdout.write(char)
         sys.stdout.flush()
         time.sleep(delay)
-
-
-
-
         #Gå tillbaka till meny
 def Valt_rum():
-    g = int(input("Välj mellan dörr 1,2,3"))
+    g = int(input("""
+Välj dörr
+Dörr 1:
+Dörr 2:
+Dörr 3:
+"""))
     # random_tal=r.randint(1,3)
     # print(random_tal)
     random_tal=1
@@ -93,16 +94,14 @@ def Valt_rum():
 def Room_monster():
     print("Du öppnar dörren, och ser ett monster.\n ")
     Monster_Action = input("Vill du fly(1) eller attakera(2)? ")
-    try:
-        if Monster_Action == "1":
+    # try:
+    if Monster_Action == "1":
             Escape_monster()
 
-        elif Monster_Action == "2":
+    elif Monster_Action == "2":
             Fight_monster()
-
-    except:
-        print("Error, try again")
-        Monster_Action = input("Vill du fly eller attakera?")
+    # except:
+    #     print("Error, try again")
 
 def Fight_monster():
     monster_damage = r.randint(1+(3*name.level), 10+(3*name.level))
@@ -138,12 +137,14 @@ def Escape_monster():
     print("Du försöker fly")
     if Escape_chance >= 5:
         print("Du lyckades att fly från monstret ")
+        Alternative()
     elif Escape_chance < 5:
         print("Du lyckades inte att fly från monstret och därför tog du skada")
         escape_damage = r.randint(10 , 20-(name.luck))
         name.hp=name.hp - escape_damage
-        print("Du tog " + escape_damage + "Skada")
-        Menu()
+        print("Du tog " + str(escape_damage) + " Skada")
+        print("Du har nu " + str(name.hp) +  "HP")
+        Alternative()
 
 def Room_chest():
     print("Du öppnar dörren, och ser en kista.\n ")
