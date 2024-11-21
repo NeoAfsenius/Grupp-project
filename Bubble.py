@@ -108,9 +108,10 @@ def Escape_monster():
     if Escape_chance >= 3:
         print("Du lyckades att fly från monstret ")
     elif Escape_chance < 3:
-        print(f"Du lyckades inte att fly från monstret och därför tog du sakada")
-        escape_damage = r.randint(1+())
+        print("Du lyckades inte att fly från monstret och därför tog du skada")
+        escape_damage = r.randint(10 , 20-(name.luck))
         name.hp=name.hp - escape_damage
+        print("Du tog " + escape_damage + "Skada")
         Menu()
 
 def Room_chest():
