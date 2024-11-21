@@ -109,9 +109,8 @@ def Escape_monster():
         print("Du lyckades att fly från monstret ")
     elif Escape_chance < 3:
         print(f"Du lyckades inte att fly från monstret och därför tog du sakada")
-        luck_based = 
-        escape_damage = r.randint(20-())
-        name.hp=name.hp
+        escape_damage = r.randint(1+())
+        name.hp=name.hp - escape_damage
         Menu()
 
 def Room_chest():
