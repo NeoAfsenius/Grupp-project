@@ -146,7 +146,7 @@ def Alternative():
         Stats()
 
 def Stats():
-    player_stats()
+    name.player_stats()
     Alternative()
 
 # MENYN
