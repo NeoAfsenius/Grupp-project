@@ -37,6 +37,24 @@ class Item:
         self.str_bonus = strength_bonus
         self.hp_bonus = health_bonus
         self.luck_bonus = luck_bonus
+
+    def sword(self, player):
+        sword = Item(2,2,0,"Svärd")
+
+        player.add_to_inventory(sword)
+        print(f"Ett svärd hamnade i ditt inventory")
+
+    def belt(self, player):
+        belt = Item(0,5,0,"Bälte")
+
+        player.add_to_inventory(belt)
+        print(f"Ett svärd hamnade i ditt inventory")
+
+    def potion(self, player):
+        potion = Item(15,0,0,"Potion")
+
+        player.add_to_inventory(potion)
+        print(f"Ett svärd hamnade i ditt inventory")
     
 
 
