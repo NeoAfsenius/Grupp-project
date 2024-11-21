@@ -65,9 +65,9 @@ Du kommer få välja mellan att öppna dörrar som kommer kunna ha antingen mons
 game_intro()
 
 def Fight_monster():
-    damage = r.randint(1+(3*name.level), 10+(3*name.level))
-    if damage >= name.str:
-        name.hp=name.hp-2*damage
+    monster_damage = r.randint(1+(3*name.level), 10+(3*name.level))
+    if monster_damage >= name.str:
+        name.hp=name.hp-2*monster_damage
         print("Du har nu" + str(name.hp) + "Hp")
     else:
         name.level=name.level+1
@@ -82,16 +82,24 @@ def Escape_monster():
     if Escape_chance >= 3:
         print("Du lyckades att fly från monstret ")
     elif Escape_chance < 3:
-        print(f"Du luckades inte att fly från monstret och därför )
+        print(f"Du luckades inte att fly från monstret och därför")
         
         Menu()
 
         #Gå tillbaka till meny
 def Valt_rum():
-    int((input)"Välj mellan dörr 1,2,3")
+    g = int(input("Välj mellan dörr 1,2,3"))
     random_tal=r.randint(1,4)
-    if random_tal = 1 :
+    print(random_tal)
+    if random_tal == 1 :
+        Room_monster()
+    if random_tal == 2 :
+        Room_trap()
+    if random_tal == 3:
+        Room_chest()
+
         
+
 
     
 def Room_monster():
@@ -127,15 +135,14 @@ def Room_trap():
     print(f"Du tog {damage} i skada")
 
 
+# ALTERNATIV 
 def Alternative():
-    print("(1) - Välj mellan 3 dörrar. \n (2) - Öppna inventory. \n (3) - Meny. \n (4) - Se Stats")
+    print(" (1) - Välj mellan 3 dörrar. \n (2) - Öppna inventory. \n (3) - Meny. \n (4) - Se Stats \n ")
     Answer = int(input("Ange vad du vill göra nu: "))
     if Answer == 1:
         Valt_rum()
-    elif Answer == 2:
-        # Open 
-n
-()vn
+    #elif Answer == 2:
+        # Open_inv
     elif Answer == 3:
         Menu()
     elif Answer == 4:
@@ -149,6 +156,7 @@ def Stats():
 def Menu():
     MenuLoop = 1
     while MenuLoop != 3:
+        print(" ")
         print("(1) - Återuppta spelet")
         print("(2) - Avsluta spelet")
         
@@ -156,14 +164,16 @@ def Menu():
             MenuAnswer = int(input("Ange ditt val här: "))
             if MenuAnswer == 1:
                 print("Återupptar spelet..")
+                print(" ")
                 MenuLoop = MenuLoop + 2
                 Alternative()
             elif MenuAnswer == 2:
                 print("Avslutar spelet..")
                 break 
             else:
+                print(" ")
                 print("Ogiltigt val. Ange 1 eller 2")
         except ValueError:
-            print("Fel! Ange ett giltigt tal (1 eller 2)")           
+            print(" ")
+            print("Fel! Ange ett giltigt tal (1 eller 2)")             
 
-Alternative()
