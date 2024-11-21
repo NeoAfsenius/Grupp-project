@@ -114,18 +114,31 @@ def Fight_monster():
     else:
         name.level=name.level+1
         name.str=name.str+2
+        lucky_number = r.randint(1,7)
+        if lucky_number%7==0:
+            name.luck=name.luck+1
+        if name.level%5==0:
+            hp = 100
         print("Du har vunnit och gått upp 1 level och 2 str!")
+        if lucky_number%7==0:
+            print("Du har tur och fick även +1 luck när du levlade upp!")
+        if name.level%5==0:
+            ("Du är extra stark nu och din hp har återgått till max!")
         Alternative()
 
 
 def Escape_monster():
-    Escape_chance = r.randint(0,10)
+    tempo_luck = name.luck
+    if name.luck >= 9:
+        name.luck = 9
+    Escape_chance = r.randint(0+(name.luck),10)
+    name.luck = tempo_luck
     damage = r.randint(1+(3*name.level), 10+(3*name.level))
 
     print("Du försöker fly")
-    if Escape_chance >= 3:
+    if Escape_chance >= 5:
         print("Du lyckades att fly från monstret ")
-    elif Escape_chance < 3:
+    elif Escape_chance < 5:
         print("Du lyckades inte att fly från monstret och därför tog du skada")
         escape_damage = r.randint(10 , 20-(name.luck))
         name.hp=name.hp - escape_damage
