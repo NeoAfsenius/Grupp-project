@@ -55,24 +55,50 @@ def print_with_delay(text, delay=0.005):
         sys.stdout.flush()
         time.sleep(delay)
 
-def game_intro():
-    #Skriver backstory
-    intro_text = """"
-Välkommen till spelet!
-Du kommer få välja mellan att öppna dörrar som kommer kunna ha antingen monster, traps eller chests med loot som hjälper dig gå vidare
-"""
-    print_with_delay(intro_text)
-game_intro()
+
+
+
+        #Gå tillbaka till meny
+def Valt_rum():
+    g = int(input("Välj mellan dörr 1,2,3"))
+    # random_tal=r.randint(1,3)
+    # print(random_tal)
+    random_tal=1
+    if random_tal == 1 :
+        Room_monster()
+    # if random_tal == 2 :
+    #     Room_trap()
+    # if random_tal == 3:
+    #     Room_chest()
+
+    
+def Room_monster():
+    print("Du öppnar dörren, och ser ett monster.\n ")
+    Monster_Action = input("Vill du fly(1) eller attakera(2)? ")
+    try:
+        if Monster_Action == "1":
+            Escape_monster()
+
+        elif Monster_Action == "2":
+            Fight_monster()
+
+    except:
+        print("Error, try again")
+        Monster_Action = input("Vill du fly eller attakera?")
 
 def Fight_monster():
     monster_damage = r.randint(1+(3*name.level), 10+(3*name.level))
     if monster_damage >= name.str:
         name.hp=name.hp-2*monster_damage
-        print("Du har nu" + str(name.hp) + "Hp")
+        print("Du förlorade och tog skada")
+        print("Du har nu" + str(name.hp) + " Hp")
+        Alternative()
     else:
         name.level=name.level+1
         name.str=name.str+2
         print("Du har vunnit och gått upp 1 level och 2 str!")
+        Alternative()
+
 
 def Escape_monster():
     Escape_chance = r.randint(0,10)
@@ -82,39 +108,11 @@ def Escape_monster():
     if Escape_chance >= 3:
         print("Du lyckades att fly från monstret ")
     elif Escape_chance < 3:
-        print(f"Du luckades inte att fly från monstret och därför")
-        
+        print(f"Du lyckades inte att fly från monstret och därför tog du sakada")
+        luck_based = 
+        escape_damage = r.randint(20-())
+        name.hp=name.hp
         Menu()
-
-        #Gå tillbaka till meny
-def Valt_rum():
-    g = int(input("Välj mellan dörr 1,2,3"))
-    random_tal=r.randint(1,4)
-    print(random_tal)
-    if random_tal == 1 :
-        Room_monster()
-    if random_tal == 2 :
-        Room_trap()
-    if random_tal == 3:
-        Room_chest()
-
-        
-
-
-    
-def Room_monster():
-    print("Du öppnar dörren, och ser ett monster.\n ")
-    Monster_Action = input("Vill du fly eller attakera?")
-    try:
-        if Monster_Action.lower == "fly":
-            Escape_monster()
-
-        elif Monster_Action.lower == "attakera":
-            Fight_monster()
-
-    except Exception as e:
-        print("Error, try again")
-        Monster_Action = input("Vill du fly eller attakera?")
 
 def Room_chest():
     print("Du öppnar dörren, och ser en kista.\n ")
@@ -176,4 +174,12 @@ def Menu():
         except ValueError:
             print(" ")
             print("Fel! Ange ett giltigt tal (1 eller 2)")             
-
+def game_intro():
+    #Skriver backstory
+    intro_text = """"
+Välkommen till spelet!
+Du kommer få välja mellan att öppna dörrar som kommer kunna ha antingen monster, traps eller chests med loot som hjälper dig gå vidare
+"""
+    print_with_delay(intro_text)
+    Alternative()
+game_intro()
