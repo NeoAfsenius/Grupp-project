@@ -73,22 +73,7 @@ def print_with_delay(text, delay=0.005):
         sys.stdout.flush()
         time.sleep(delay)
         #Gå tillbaka till meny
-def Valt_rum():
-    g = int(input("""
-Välj dörr
-Dörr 1:
-Dörr 2:
-Dörr 3:
-"""))
-    # random_tal=r.randint(1,3)
-    # print(random_tal)
-    random_tal=1
-    if random_tal == 1 :
-        Room_monster()
-    # if random_tal == 2 :
-    #     Room_trap()
-    # if random_tal == 3:
-    #     Room_chest()
+
 
     
 def Room_monster():
@@ -151,17 +136,17 @@ def Room_chest():
 
     #Nödvädnigt med try?
     try:
-        if Spelare.luck == 1:
+        if name.luck == 1:
             chest_chance = r.randint(1, 10)
-        elif Spelare.luck == 2: 
-            chest_chance = r.randint(1+2*Spelare.luck, 10)
+        elif name.luck == 2: 
+            chest_chance = r.randint(1+2*name.luck, 10)
     except Exception as e:
         print("Error, name.luck in Room_chest had a problem") 
     
 def Room_trap():
     print("Du öppnar dörren, och blir tagen i en fälla.\n ")
-    damage = r.randint(10,40)/Spelare.luck
-    Spelare.hp =- damage
+    damage = r.randint(10,40)/name.luck
+    name.hp =- damage
     print(f"Du tog {damage} i skada")
 
 
@@ -206,12 +191,29 @@ def Menu():
         except ValueError:
             print(" ")
             print("Fel! Ange ett giltigt tal (1 eller 2)")             
+
+def Valt_rum():
+    g = int(input("""
+Välj dörr
+Dörr 1:
+Dörr 2:
+Dörr 3:
+"""))
+    random_tal=r.randint(1,3)
+    if random_tal == 1:
+        Room_monster()
+    if random_tal == 2:
+        Room_trap()
+    if random_tal == 3:
+        Room_chest()
+
 def game_intro():
     #Skriver backstory
     intro_text = """"
 Välkommen till spelet!
 Du kommer få välja mellan att öppna dörrar som kommer kunna ha antingen monster, traps eller chests med loot som hjälper dig gå vidare
 """
+
     print_with_delay(intro_text)
     Alternative()
 game_intro()
