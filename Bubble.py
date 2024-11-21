@@ -88,7 +88,10 @@ def Escape_monster():
 
         #Gå tillbaka till meny
 def Valt_rum():
-    int(input) =
+    int((input)"Välj mellan dörr 1,2,3")
+    random_tal=r.randint(1,4)
+    if random_tal = 1 :
+        
 
     
 def Room_monster():
