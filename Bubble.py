@@ -40,21 +40,26 @@ class Item:
     def sword(self, player):
         sword = Item(2,2,0,"Svärd")
 
-        player.add_to_inventory(sword)
+        name.add_to_inventory(sword)
         print(f"Ett svärd hamnade i ditt inventory")
 
     def belt(self, player):
         belt = Item(0,5,0,"Bälte")
 
-        player.add_to_inventory(belt)
+        name.add_to_inventory(belt)
         print(f"Ett svärd hamnade i ditt inventory")
 
     def potion(self, player):
         potion = Item(15,0,0,"Potion")
-
-        player.add_to_inventory(potion)
-        print(f"Ett svärd hamnade i ditt inventory")
     
+
+        name.add_to_inventory(potion)
+        print(f"Ett svärd hamnade i ditt inventory")
+    def luckybraclet(self, player):
+        luckybraclet = Item(0,0,2)
+
+        name.add_to_inventory(luckybraclet)
+        print(f"Ett armband hamnade i ditt inventory")
 
 
 name = input("Spelarens namn: ") 
@@ -69,37 +74,20 @@ def print_with_delay(text, delay=0.005):
         sys.stdout.write(char)
         sys.stdout.flush()
         time.sleep(delay)
-
-
-
-
         #Gå tillbaka till meny
-def Valt_rum():
-    g = int(input("Välj mellan dörr 1,2,3"))
-    # random_tal=r.randint(1,3)
-    # print(random_tal)
-    random_tal=1
-    if random_tal == 1 :
-        Room_monster()
-    # if random_tal == 2 :
-    #     Room_trap()
-    # if random_tal == 3:
-    #     Room_chest()
 
-    
+
 def Room_monster():
     print("Du öppnar dörren, och ser ett monster.\n ")
     Monster_Action = input("Vill du fly(1) eller attakera(2)? ")
-    try:
-        if Monster_Action == "1":
+    # try:
+    if Monster_Action == "1":
             Escape_monster()
 
-        elif Monster_Action == "2":
+    elif Monster_Action == "2":
             Fight_monster()
-
-    except:
-        print("Error, try again")
-        Monster_Action = input("Vill du fly eller attakera?")
+    # except:
+    #     print("Error, try again")
 
 def Fight_monster():
     monster_damage = r.randint(1+(3*name.level), 10+(3*name.level))
@@ -134,30 +122,35 @@ def Escape_monster():
     print("Du försöker fly")
     if Escape_chance >= 5:
         print("Du lyckades att fly från monstret ")
+        Alternative()
     elif Escape_chance < 5:
         print("Du lyckades inte att fly från monstret och därför tog du skada")
         escape_damage = r.randint(10 , 20-(name.luck))
         name.hp=name.hp - escape_damage
-        print("Du tog " + escape_damage + "Skada")
-        Menu()
+        print("Du tog " + str(escape_damage) + " Skada")
+        print("Du har nu " + str(name.hp) +  "HP")
+        Alternative()
 
 def Room_chest():
     print("Du öppnar dörren, och ser en kista.\n ")
 
     #Nödvädnigt med try?
     try:
-        if Spelare.luck == 1:
-            chest_chance = r.randint(1, 10)
-        elif Spelare.luck == 2: 
-            chest_chance = r.randint(1+2*Spelare.luck, 10)
+        if name.luck == 1:
+            chest_chance = r.randint(1, 20)
+        elif name.luck == 2: 
+            chest_chance = r.randint(1+2*name.luck, 20)
     except Exception as e:
         print("Error, name.luck in Room_chest had a problem") 
+    if chest_chance %2==0 and chest_chance>5:
+        temp_nummer=
     
 def Room_trap():
     print("Du öppnar dörren, och blir tagen i en fälla.\n ")
-    damage = r.randint(10,40)/Spelare.luck
-    Spelare.hp =- damage
+    damage = r.randint(10,40)/name.luck
+    name.hp =- damage
     print(f"Du tog {damage} i skada")
+    Alternative()
 
 
 # ALTERNATIV 
@@ -201,12 +194,29 @@ def Menu():
         except ValueError:
             print(" ")
             print("Fel! Ange ett giltigt tal (1 eller 2)")             
+
+def Valt_rum():
+    g = int(input("""
+Välj dörr
+Dörr 1:
+Dörr 2:
+Dörr 3:
+"""))
+    random_tal=r.randint(1,3)
+    if random_tal == 1:
+        Room_monster()
+    if random_tal == 2:
+        Room_trap()
+    if random_tal == 3:
+        Room_chest()
+
 def game_intro():
     #Skriver backstory
     intro_text = """"
 Välkommen till spelet!
 Du kommer få välja mellan att öppna dörrar som kommer kunna ha antingen monster, traps eller chests med loot som hjälper dig gå vidare
 """
+
     print_with_delay(intro_text)
     Alternative()
 game_intro()
