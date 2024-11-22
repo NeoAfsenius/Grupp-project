@@ -18,18 +18,28 @@ class Spelare:
         if len(self.inventory) < 5:
             self.inventory.append(item)
             print(f"Du la till {item} i ditt inventory")
+            print("")
+            Alternative()
         else:
             print("Ditt inventory är fullt, ta bort ett item för att lägga till det nya")
+            print("")
+            Alternative()
     
     def remove_from_inventory(self, item):
         if len(self.inventory) <= 5:
             self.inventory.remove(item)
             print(f"Tog bort {item}ur inventoryt")
+            print("")
+            Alternative()
         elif len(self.inventory) == 0: 
             print("Finns inga nuvarande items i ditt inventory")
+            print("")
+            Alternative()
 
-    def show_inventory(self, item):
+    def show_inventory(self):
         print(self.inventory) 
+        print("")
+        Alternative()
 
 class Item:
     def __init__(self, strength_bonus, health_bonus, luck_bonus):
@@ -52,9 +62,9 @@ class Item:
     def potion(self, player):
         potion = Item(15,0,0,"Potion")
     
-
         name.add_to_inventory(potion)
         print(f"Ett svärd hamnade i ditt inventory")
+
     def luckybraclet(self, player):
         luckybraclet = Item(0,0,2)
 
@@ -94,7 +104,8 @@ def Fight_monster():
     if monster_damage >= name.str:
         name.hp=name.hp-2*monster_damage
         print("Du förlorade och tog skada")
-        print("Du har nu" + str(name.hp) + " Hp")
+        print(f"Du har nu {name.hp} Hp")
+        print("")
         Alternative()
     elif monster_damage == name.str:
         print("Ni är lika starka, du går vidare")
@@ -142,8 +153,9 @@ def Room_chest():
             chest_chance = r.randint(1+2*name.luck, 20)
     except Exception as e:
         print("Error, name.luck in Room_chest had a problem") 
-    if chest_chance %2==0 and chest_chance>5:
-        temp_nummer=
+
+    # if chest_chance %2==0 and chest_chance>5:
+    #     temp_nummer=
     
 def Room_trap():
     print("Du öppnar dörren, och blir tagen i en fälla.\n ")
@@ -152,15 +164,14 @@ def Room_trap():
     print(f"Du tog {damage} i skada")
     Alternative()
 
-
 # ALTERNATIV 
 def Alternative():
     print(" (1) - Välj mellan 3 dörrar. \n (2) - Öppna inventory. \n (3) - Meny. \n (4) - Se Stats \n ")
     Answer = int(input("Ange vad du vill göra nu: "))
     if Answer == 1:
         Valt_rum()
-    #elif Answer == 2:
-        # Open_inv
+    elif Answer == 2:
+        name.show_inventory()
     elif Answer == 3:
         Menu()
     elif Answer == 4:
@@ -212,7 +223,7 @@ Dörr 3:
 
 def game_intro():
     #Skriver backstory
-    intro_text = """"
+    intro_text = """
 Välkommen till spelet!
 Du kommer få välja mellan att öppna dörrar som kommer kunna ha antingen monster, traps eller chests med loot som hjälper dig gå vidare
 """
