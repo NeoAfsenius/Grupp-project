@@ -150,14 +150,14 @@ def Room_chest():
         chest_chance = r.randint(1, 20)
     elif name.luck == 2: 
         chest_chance = r.randint(1+2*name.luck, 20)
-    if chest_chance(5,20):
-        if chest_chance(5,8):
+    if chest_chance <5 and chest_chance <21:
+        if chest_chance <5 and  chest_chance<9:
             Item.sword()
-        elif chest_chance(9, 12):
+        elif chest_chance <=9 and  chest_chance<12:
             Item.luckybraclet
-        elif chest_chance(13,16):
+        elif chest_chance <=12 and chest_chance<17:
             Item.belt
-        elif chest_chance(17,20):
+        elif chest_chance <=17 and chest_chance<21:
             Item.potion
     
 def Room_trap():
