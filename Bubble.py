@@ -41,19 +41,19 @@ class Item:
     def sword(self, player):
         sword = Item(2,2,0,"Svärd")
 
-        player.add_to_inventory(sword)
+        name.add_to_inventory(sword)
         print(f"Ett svärd hamnade i ditt inventory")
 
     def belt(self, player):
         belt = Item(0,5,0,"Bälte")
 
-        player.add_to_inventory(belt)
+        name.add_to_inventory(belt)
         print(f"Ett svärd hamnade i ditt inventory")
 
     def potion(self, player):
         potion = Item(15,0,0,"Potion")
 
-        player.add_to_inventory(potion)
+        name.add_to_inventory(potion)
         print(f"Ett svärd hamnade i ditt inventory")
     
 
@@ -75,7 +75,6 @@ def print_with_delay(text, delay=0.005):
         #Gå tillbaka till meny
 
 
-    
 def Room_monster():
     print("Du öppnar dörren, och ser ett monster.\n ")
     Monster_Action = input("Vill du fly(1) eller attakera(2)? ")
@@ -148,6 +147,7 @@ def Room_trap():
     damage = r.randint(10,40)/name.luck
     name.hp =- damage
     print(f"Du tog {damage} i skada")
+    Alternative()
 
 
 # ALTERNATIV 
