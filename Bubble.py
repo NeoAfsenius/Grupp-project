@@ -14,7 +14,6 @@ class Spelare:
     def player_stats(self):
         print(f"HP: {self.hp}, STRENGTH: {self.str}, LUCK: {self.luck}, LEVEL: {self.level}")
   
-
     def add_to_inventory(self, item):
         if len(self.inventory) < 5:
             self.inventory.append(item)
@@ -97,19 +96,18 @@ def Fight_monster():
         print("Du förlorade och tog skada")
         print("Du har nu" + str(name.hp) + " Hp")
         Alternative()
+    elif monster_damage == name.str:
+        print("Ni är lika starka, du går vidare")
+        Alternative()
     else:
-        name.level=name.level+1
-        name.str=name.str+2
+        name.level =+ 1
+        name.str=+ 2
         lucky_number = r.randint(1,7)
+        
         if lucky_number%7==0:
-            name.luck=name.luck+1
-        if name.level%5==0:
-            hp = 100
-        print("Du har vunnit och gått upp 1 level och 2 str!")
-        if lucky_number%7==0:
+            name.luck=+ 1
             print("Du har tur och fick även +1 luck när du levlade upp!")
-        if name.level%5==0:
-            ("Du är extra stark nu och din hp har återgått till max!")
+            
         Alternative()
 
 
@@ -119,7 +117,7 @@ def Escape_monster():
         name.luck = 9
     Escape_chance = r.randint(0+(name.luck),10)
     name.luck = tempo_luck
-    damage = r.randint(1+(3*name.level), 10+(3*name.level))
+    escape_damage = r.randint(1+(3*name.level), 10+(3*name.level))
 
     print("Du försöker fly")
     if Escape_chance >= 5:
