@@ -170,7 +170,7 @@ def Room_trap():
 
 # ALTERNATIV 
 def Alternative():
-    print("(1) - Välj mellan 3 dörrar. \n (2) - Öppna inventory. \n (3) - Meny. \n (4) - Se Stats \n ")
+    print(" [1] - Välj mellan 3 dörrar. \n [2] - Öppna inventory. \n [3] - Meny. \n [4] - Se Stats \n ")
     Answer = int(input("Ange vad du vill göra nu: "))
     if Answer == 1:
         Valt_rum()
@@ -185,9 +185,7 @@ def Alternative():
 def Menu():
     MenuLoop = 1
     while MenuLoop != 3:
-        print(" ")
-        print("(1) - Återuppta spelet")
-        print("(2) - Avsluta spelet")
+        print("\n [1] - Återuppta spelet \n [2] - Avsluta spelet")
         
         try:
             MenuAnswer = int(input("Ange ditt val här: "))
