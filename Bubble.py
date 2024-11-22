@@ -157,7 +157,7 @@ def Room_trap():
 
 # ALTERNATIV 
 def Alternative():
-    print(" (1) - Välj mellan 3 dörrar. \n (2) - Öppna inventory. \n (3) - Meny. \n (4) - Se Stats \n ")
+    print("(1) - Välj mellan 3 dörrar. \n (2) - Öppna inventory. \n (3) - Meny. \n (4) - Se Stats \n ")
     Answer = int(input("Ange vad du vill göra nu: "))
     if Answer == 1:
         Valt_rum()
