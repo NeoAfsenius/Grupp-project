@@ -53,9 +53,9 @@ class Item:
     def potion(self, player):
         potion = Item(15,0,0,"Potion")
     
-
         name.add_to_inventory(potion)
-        print(f"Ett svärd hamnade i ditt inventory")
+        print(f" potion hamnade i ditt inventory")
+    
     def luckybraclet(self, player):
         luckybraclet = Item(0,0,2)
 
@@ -103,13 +103,6 @@ def Fight_monster():
         lucky_number = r.randint(1,7)
         if lucky_number%7==0:
             name.luck=name.luck+1
-        if name.level%5==0:
-            hp = 100
-        print("Du har vunnit och gått upp 1 level och 2 str!")
-        if lucky_number%7==0:
-            print("Du har tur och fick även +1 luck när du levlade upp!")
-        if name.level%5==0:
-            ("Du är extra stark nu och din hp har återgått till max!")
         Alternative()
 
 
@@ -137,15 +130,23 @@ def Room_chest():
     print("Du öppnar dörren, och ser en kista.\n ")
 
     #Nödvädnigt med try?
-    try:
-        if name.luck == 1:
-            chest_chance = r.randint(1, 20)
-        elif name.luck == 2: 
-            chest_chance = r.randint(1+2*name.luck, 20)
-    except Exception as e:
-        print("Error, name.luck in Room_chest had a problem") 
+    if name.luck == 1:
+        chest_chance = r.randint(1, 20)
+    elif name.luck == 2: 
+        chest_chance = r.randint(1+2*name.luck, 20)
     if chest_chance %2==0 and chest_chance>5:
-        temp_nummer=
+        temp_nummer=r.randint(5,20)
+    if temp_nummer(5,8):
+        Item.sword()
+    elif temp_nummer(9, 12):
+        Item.luckybraclet
+    elif temp_nummer(13,16):
+        Item.belt
+    elif temp_nummer(17,20):
+        Item.potion
+
+
+
     
 def Room_trap():
     print("Du öppnar dörren, och blir tagen i en fälla.\n ")
