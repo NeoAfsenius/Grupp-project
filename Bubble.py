@@ -52,10 +52,15 @@ class Item:
 
     def potion(self, player):
         potion = Item(15,0,0,"Potion")
+    
 
         name.add_to_inventory(potion)
         print(f"Ett svärd hamnade i ditt inventory")
-    
+    def luckybraclet(self, player):
+        luckybraclet = Item(0,0,2)
+
+        name.add_to_inventory(luckybraclet)
+        print(f"Ett armband hamnade i ditt inventory")
 
 
 name = input("Spelarens namn: ") 
@@ -136,11 +141,13 @@ def Room_chest():
     #Nödvädnigt med try?
     try:
         if name.luck == 1:
-            chest_chance = r.randint(1, 10)
+            chest_chance = r.randint(1, 20)
         elif name.luck == 2: 
-            chest_chance = r.randint(1+2*name.luck, 10)
+            chest_chance = r.randint(1+2*name.luck, 20)
     except Exception as e:
         print("Error, name.luck in Room_chest had a problem") 
+    if chest_chance %2==0 and chest_chance>5:
+        temp_nummer=
     
 def Room_trap():
     print("Du öppnar dörren, och blir tagen i en fälla.\n ")
