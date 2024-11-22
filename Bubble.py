@@ -166,16 +166,24 @@ def Room_trap():
 
 # ALTERNATIV 
 def Alternative():
-    print("(1) - Välj mellan 3 dörrar. \n (2) - Öppna inventory. \n (3) - Meny. \n (4) - Se Stats \n ")
-    Answer = int(input("Ange vad du vill göra nu: "))
-    if Answer == 1:
-        Valt_rum()
-    elif Answer == 2:
-        name.show_inventory()
-    elif Answer == 3:
-        Menu()
-    elif Answer == 4:
-        Stats()
+    print(" (1) - Välj mellan 3 dörrar. \n (2) - Öppna inventory. \n (3) - Meny. \n (4) - Se Stats \n ")
+    try:
+        Answer = int(input("Ange vad du vill göra nu: "))
+        if Answer == 1:
+            Valt_rum()
+        elif Answer == 2:
+            name.show_inventory()
+        elif Answer == 3:
+            Menu()
+        elif Answer == 4:
+            Stats()
+        elif Answer > 4 or Answer < 1:
+            print("\n Error: Välj ett tal mellan 1 - 4")
+            Alternative()
+    except ValueError:
+        print("\n Error: Välj ett tal mellan 1 - 4")
+        Alternative()
+
 
 def Stats():
     name.player_stats()
