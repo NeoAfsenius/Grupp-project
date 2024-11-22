@@ -13,6 +13,7 @@ class Spelare:
 
     def player_stats(self):
         print(f"HP: {self.hp}, STRENGTH: {self.str}, LUCK: {self.luck}, LEVEL: {self.level}")
+        Alternative()
   
     def add_to_inventory(self, item):
         if len(self.inventory) < 5:
@@ -178,11 +179,7 @@ def Alternative():
     elif Answer == 3:
         Menu()
     elif Answer == 4:
-        Stats()
-
-def Stats():
-    name.player_stats()
-    Alternative()
+        name.player_stats()
 
 # MENYN
 def Menu():
@@ -233,4 +230,5 @@ Du kommer få välja mellan att öppna dörrar som kommer kunna ha antingen mons
 
     print_with_delay(intro_text)
     Alternative()
+
 game_intro()
