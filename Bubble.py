@@ -61,7 +61,6 @@ class Item:
 name = input("Spelarens namn: ") 
 name = Spelare(100, 10, 1, 1)
 
-item = Item(2,2,2)
 
 room_count = 0
 chest = []
