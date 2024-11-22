@@ -134,18 +134,15 @@ def Room_chest():
         chest_chance = r.randint(1, 20)
     elif name.luck == 2: 
         chest_chance = r.randint(1+2*name.luck, 20)
-    if chest_chance %2==0 and chest_chance>5:
-        temp_nummer=r.randint(5,20)
-    if temp_nummer(5,8):
-        Item.sword()
-    elif temp_nummer(9, 12):
-        Item.luckybraclet
-    elif temp_nummer(13,16):
-        Item.belt
-    elif temp_nummer(17,20):
-        Item.potion
-
-
+    if chest_chance(5,20):
+        if chest_chance(5,8):
+            Item.sword()
+        elif chest_chance(9, 12):
+            Item.luckybraclet
+        elif chest_chance(13,16):
+            Item.belt
+        elif chest_chance(17,20):
+            Item.potion
 
     
 def Room_trap():
