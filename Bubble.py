@@ -223,13 +223,21 @@ Dörr 1:
 Dörr 2:
 Dörr 3:
 """))
-    random_tal=r.randint(1,3)
-    if random_tal == 1:
-        Room_monster()
-    if random_tal == 2:
-        Room_trap()
-    if random_tal == 3:
-        Room_chest()
+    try:
+        random_tal=r.randint(1,3)
+        if random_tal == 1:
+            Room_monster()
+        elif random_tal == 2:
+            Room_trap()
+        elif random_tal == 3:
+            Room_chest()
+        elif random_tal < 1 or random_tal > 3:
+            print("\n Fel! Ange ett tal mellan 1-3")
+            Valt_rum()
+    except ValueError:
+        print("\n Fel! Ange ett tal mellan 1-3")
+        Valt_rum()
+    
 
 def game_intro():
     #Skriver backstory
