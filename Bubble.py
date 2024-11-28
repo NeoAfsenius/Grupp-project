@@ -3,12 +3,13 @@ import sys
 import time
 
 class Spelare:
-    def __init__(self, player_hp,player_str,player_luck, player_level):
+    def __init__(self, player_hp,player_str,player_luck, player_level, player_name):
         self.hp = player_hp
         self.str = player_str
         self.luck = player_luck
         self.level = player_level
         self.inventory = []
+        self.name = player_name
         # self.name = player_name
 
     def player_stats(self):
@@ -65,7 +66,7 @@ def create_unluckyboots():
 
 
 name = input("Spelarens namn: ") 
-name = Spelare(100, 10, 1, 1)
+player = Spelare(100, 10, 1, 1, name)
 room_count = 0
 
 
@@ -91,34 +92,34 @@ def Room_monster():
     #     print("Error, try again")
 
 def Fight_monster():
-    monster_damage = r.randint(1+(3*name.level), 10+(3*name.level))
-    if monster_damage >= name.str:
-        name.hp = name.hp-2*monster_damage
+    monster_damage = r.randint(1+(3*player.level), 10+(3*player.level))
+    if monster_damage >= player.str:
+        player.hp = player.hp-2*monster_damage
         print("Du förlorade och tog skada")
-        print(f"Du har nu {name.hp} Hp")
+        print(f"Du har nu {player.hp} Hp")
         print("")
         Alternative()
-    elif monster_damage == name.str:
+    elif monster_damage == player.str:
         print("Ni är lika starka, du går vidare")
         Alternative()
-    if monster_damage <= name.strr:
-        name.level =+ 1
-        name.str=+ 2
+    if monster_damage <= player.strr:
+        player.level =+ 1
+        player.str=+ 2
         lucky_number = r.randint(1,7)
         
         if lucky_number%7==0:
 
-            name.luck=+ 1
+            player.luck=+ 1
             print("Du har tur och fick även +1 luck när du levlade upp!")
         Alternative()
 
 def Escape_monster():
-    tempo_luck = name.luck
-    if name.luck >= 9:
-        name.luck = 9
-    Escape_chance = r.randint(0+(name.luck),10)
-    name.luck = tempo_luck
-    escape_damage = r.randint(1+(3*name.level), 10+(3*name.level))
+    tempo_luck = player.luck
+    if player.luck >= 9:
+        player.luck = 9
+    Escape_chance = r.randint(0+(player.luck),10)
+    player.luck = tempo_luck
+    escape_damage = r.randint(1+(3*player.level), 10+(3*player.level))
 
     print("Du försöker fly")
     if Escape_chance >= 5:
@@ -126,39 +127,39 @@ def Escape_monster():
         Alternative()
     elif Escape_chance < 5:
         print("Du lyckades inte att fly från monstret och därför tog du skada")
-        escape_damage = r.randint(10 , 20-(name.luck))
-        name.hp=name.hp - escape_damage
+        escape_damage = r.randint(10 , 20-(player.luck))
+        player.hp=player.hp - escape_damage
         print("Du tog " + str(escape_damage) + " Skada")
-        print("Du har nu " + str(name.hp) +  "HP")
+        print("Du har nu " + str(player.hp) +  "HP")
         Alternative()
 
 def Room_chest():
     print("Du öppnar dörren, och ser en kista.\n ")
 
     #Nödvädnigt med try?
-    if name.luck == 1:
+    if player.luck == 1:
         chest_chance = r.randint(1, 20)
-    elif name.luck == 2: 
-        chest_chance = r.randint(1+2*name.luck, 20)
+    elif player.luck == 2: 
+        chest_chance = r.randint(1+2*player.luck, 20)
     if chest_chance >5 and chest_chance <21:
         if chest_chance >5 and  chest_chance<9:
-            name.add_to_inventory(Item.sword())
+            player.add_to_inventory(Item.sword())
         elif chest_chance >=9 and  chest_chance<12:
             luckybraclet = create_luckybraclet()
-            name.add_to_inventory(luckybraclet)
+            player.add_to_inventory(luckybraclet)
         elif chest_chance >=12 and chest_chance<17:
             sword = create_sword()
-            name.add_to_inventory(sword)
+            player.add_to_inventory(sword)
         elif chest_chance >=17 and chest_chance<21:
             potion = create_potion()
-            name.add_to_inventory(potion)
+            player.add_to_inventory(potion)
     elif chest_chance <=5:
-        name.add_to_inventory(Item.unluckyboots())
+        player.add_to_inventory(Item.unluckyboots())
 
 def Room_trap():
     print("Du öppnar dörren, och blir tagen i en fälla.\n ")
-    damage = r.randint(10,40)/name.luck
-    name.hp =- damage
+    damage = r.randint(10,40)/player.luck
+    player.hp =- damage
     print(f"Du tog {damage} i skada")
     Alternative()
 
@@ -171,11 +172,11 @@ def Alternative():
         if Answer == 1:
             Valt_rum()
         elif Answer == 2:
-            name.show_inventory()
+            player.show_inventory()
         elif Answer == 3:
             Menu()
         elif Answer == 4:
-            name.player_stats()
+            player.player_stats()
         elif Answer < 1 or Answer > 4:
             print("\n Fel! Ange ett giltigt tal 1-4")
             Alternative()
@@ -231,7 +232,7 @@ Dörr 3:
 def game_intro():
     #Skriver backstory
     intro_text = f"""
-Välkommen till spelet, {name}!
+Välkommen till spelet, {player.name}!
 Du kommer få välja mellan att öppna dörrar som kan innehålla monster, fällor,
 eller kistor med loot som hjälper dig att gå vidare.
 """
