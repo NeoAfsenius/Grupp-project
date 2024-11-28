@@ -69,6 +69,7 @@ name = Spelare(100, 10, 1, 1)
 room_count = 0
 
 
+
 def print_with_delay(text, delay=0.01):
     # Skriver text med fördröjning
     for char in text:
@@ -100,11 +101,13 @@ def Fight_monster():
     elif monster_damage == name.str:
         print("Ni är lika starka, du går vidare")
         Alternative()
-    if monster_damage <= name.str:
+    if monster_damage <= name.strr:
         name.level =+ 1
         name.str=+ 2
         lucky_number = r.randint(1,7)
+        
         if lucky_number%7==0:
+
             name.luck=+ 1
             print("Du har tur och fick även +1 luck när du levlade upp!")
         Alternative()
@@ -141,12 +144,14 @@ def Room_chest():
         if chest_chance >5 and  chest_chance<9:
             name.add_to_inventory(Item.sword())
         elif chest_chance >=9 and  chest_chance<12:
-            name.add_to_inventory(Item.luckybraclet())
+            luckybraclet = create_luckybraclet()
+            name.add_to_inventory(luckybraclet)
         elif chest_chance >=12 and chest_chance<17:
-            name.add_to_inventory(Item.belt())
+            sword = create_sword()
+            name.add_to_inventory(sword)
         elif chest_chance >=17 and chest_chance<21:
-            potion) 
-            name.add_to_inventory(Item.potion())
+            potion = create_potion()
+            name.add_to_inventory(potion)
     elif chest_chance <=5:
         name.add_to_inventory(Item.unluckyboots())
 
