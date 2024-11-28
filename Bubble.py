@@ -48,25 +48,26 @@ class Item:
         self.hp_bonus = health_bonus
         self.luck_bonus = luck_bonus
 
-    def sword(self):
-        sword = Item(2,2,0)
+def create_sword():
+    return Item(2,2,0)
 
-    def belt(self):
-        belt = Item(0,5,0)
+def create_belt():
+    return Item(0,5,0)
 
-    def potion(self):
-        potion = Item(15,0,0,)
-   
-    def luckybraclet(self):
-        luckybraclet = Item(0,0,2)
+def create_potion():
+    return Item(15,0,0,)
 
-    def unluckyboots(self):
-        unluckboots = Item(0,-10,0)
+def create_luckybraclet():
+    return Item(0,0,2)
+
+def create_unluckyboots():
+    return Item(0,-10,0)
 
 
 name = input("Spelarens namn: ") 
 name = Spelare(100, 10, 1, 1)
 room_count = 0
+
 
 def print_with_delay(text, delay=0.01):
     # Skriver text med fördröjning
@@ -91,7 +92,7 @@ def Room_monster():
 def Fight_monster():
     monster_damage = r.randint(1+(3*name.level), 10+(3*name.level))
     if monster_damage >= name.str:
-        name.hp=name.hp-2*monster_damage
+        name.hp = name.hp-2*monster_damage
         print("Du förlorade och tog skada")
         print(f"Du har nu {name.hp} Hp")
         print("")
@@ -99,13 +100,11 @@ def Fight_monster():
     elif monster_damage == name.str:
         print("Ni är lika starka, du går vidare")
         Alternative()
-    else:
+    if monster_damage <= name.str:
         name.level =+ 1
         name.str=+ 2
         lucky_number = r.randint(1,7)
-        
         if lucky_number%7==0:
-
             name.luck=+ 1
             print("Du har tur och fick även +1 luck när du levlade upp!")
         Alternative()
@@ -146,6 +145,7 @@ def Room_chest():
         elif chest_chance >=12 and chest_chance<17:
             name.add_to_inventory(Item.belt())
         elif chest_chance >=17 and chest_chance<21:
+            potion) 
             name.add_to_inventory(Item.potion())
     elif chest_chance <=5:
         name.add_to_inventory(Item.unluckyboots())
@@ -226,10 +226,10 @@ Dörr 3:
 def game_intro():
     #Skriver backstory
     intro_text = f"""
-    Välkommen till spelet, {name}!
-    Du kommer få välja mellan att öppna dörrar som kan innehålla monster, fällor,
-    eller kistor med loot som hjälper dig att gå vidare.
-    """
+Välkommen till spelet, {name}!
+Du kommer få välja mellan att öppna dörrar som kan innehålla monster, fällor,
+eller kistor med loot som hjälper dig att gå vidare.
+"""
 
     print_with_delay(intro_text)
     Alternative()
