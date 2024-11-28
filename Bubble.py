@@ -48,34 +48,21 @@ class Item:
         self.hp_bonus = health_bonus
         self.luck_bonus = luck_bonus
 
-    def sword(self, name):
-        sword = Item(2,2,0,"Svärd")
+    def sword(self):
+        sword = Item(2,2,0)
 
-        name.add_to_inventory(sword)
-        print(f"Ett svärd hamnade i ditt inventory")
+    def belt(self):
+        belt = Item(0,5,0)
 
-    def belt(self, name):
-        belt = Item(0,5,0,"Bälte")
-
-        name.add_to_inventory(belt)
-        print(f"Ett svärd hamnade i ditt inventory")
-
-    def potion(self, name):
-        potion = Item(15,0,0,"Potion")
-    
-        name.add_to_inventory(potion)
-        print(f" potion hamnade i ditt inventory")
+    def potion(self):
+        potion = Item(15,0,0,)
    
-    def luckybraclet(self, name):
+    def luckybraclet(self):
         luckybraclet = Item(0,0,2)
 
-        name.add_to_inventory(luckybraclet)
-        print(f"Ett armband hamnade i ditt inventory")
-    def unluckyboots(self, name):
+    def unluckyboots(self):
         unluckboots = Item(0,-10,0)
 
-        name.add_to_inventory(unluckboots)
-        print(f"Stövlar hamnade i ditt inventory")
 
 name = input("Spelarens namn: ") 
 name = Spelare(100, 10, 1, 1)
@@ -159,6 +146,7 @@ def Room_chest():
             Item.luckybraclet()
         elif chest_chance >=12 and chest_chance<17:
             Item.belt()
+
         elif chest_chance >=17 and chest_chance<21:
             Item.potion()
     elif chest_chance <=5:
