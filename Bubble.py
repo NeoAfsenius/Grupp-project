@@ -92,7 +92,7 @@ def Room_monster():
     #     print("Error, try again")
 
 def Fight_monster():
-    monster_damage = r.randint(1+(3*player.level), 10+(3*player.level))
+    monster_damage = r.randint(1+(2*player.level), 10+(2*player.level))
     if monster_damage >= player.str:
         player.hp = player.hp-2*monster_damage
         print("Du förlorade och tog skada")
@@ -103,10 +103,10 @@ def Fight_monster():
         print("Ni är lika starka, du går vidare")
         Alternative()
     if monster_damage <= player.str:
-        player.level =+ 1
-        player.str=+ 2
+        player.level = player.level + 1
+        player.str= player.str + 2
         lucky_number = r.randint(1,7)
-        
+        print("Du vann över monstret och gick upp i Level och din str gick upp 2 enheter")
         if lucky_number%7==0:
 
             player.luck=+ 1
@@ -160,31 +160,33 @@ def Room_chest():
 
 def Room_trap():
     print("Du öppnar dörren, och blir tagen i en fälla.\n ")
-    damage = r.randint(10,40)/player.luck
+    damage = r.randint(5,20)/player.luck
     player.hp =- damage
     print(f"Du tog {damage} i skada")
     Alternative()
 
 # ALTERNATIV 
 def Alternative():
-    print(" [1] - Välj mellan 3 dörrar. \n [2] - Öppna inventory. \n [3] - Meny. \n [4] - Se Stats \n ")
-
-    try:
-        Answer = int(input("Ange vad du vill göra nu: "))
-        if Answer == 1:
-            Valt_rum()
-        elif Answer == 2:
-            player.show_inventory()
-        elif Answer == 3:
-            Menu()
-        elif Answer == 4:
-            player.player_stats()
-        elif Answer < 1 or Answer > 4:
+    if player.hp > 0:
+        print(" [1] - Välj mellan 3 dörrar. \n [2] - Öppna inventory. \n [3] - Meny. \n [4] - Se Stats \n ")
+        try:
+            Answer = int(input("Ange vad du vill göra nu: "))
+            if Answer == 1:
+                Valt_rum()
+            elif Answer == 2:
+                player.show_inventory()
+            elif Answer == 3:
+                Menu()
+            elif Answer == 4:
+                player.player_stats()
+            elif Answer < 1 or Answer > 4:
+                print("\n Fel! Ange ett giltigt tal 1-4")
+                Alternative()
+        except ValueError:
             print("\n Fel! Ange ett giltigt tal 1-4")
             Alternative()
-    except ValueError:
-        print("\n Fel! Ange ett giltigt tal 1-4")
-        Alternative()
+    if player.hp < 0: 
+        print("Du förlorade!")
 
 # MENYN
 def Menu():
