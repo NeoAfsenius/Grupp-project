@@ -162,15 +162,23 @@ def Room_trap():
 # ALTERNATIV 
 def Alternative():
     print(" [1] - Välj mellan 3 dörrar. \n [2] - Öppna inventory. \n [3] - Meny. \n [4] - Se Stats \n ")
-    Answer = int(input("Ange vad du vill göra nu: "))
-    if Answer == 1:
-        Valt_rum()
-    elif Answer == 2:
-        name.show_inventory()
-    elif Answer == 3:
-        Menu()
-    elif Answer == 4:
-        name.player_stats()
+
+    try:
+        Answer = int(input("Ange vad du vill göra nu: "))
+        if Answer == 1:
+            Valt_rum()
+        elif Answer == 2:
+            name.show_inventory()
+        elif Answer == 3:
+            Menu()
+        elif Answer == 4:
+            name.player_stats()
+        elif Answer < 1 or Answer > 4:
+            print("\n Fel! Ange ett giltigt tal 1-4")
+            Alternative()
+    except ValueError:
+        print("\n Fel! Ange ett giltigt tal 1-4")
+        Alternative()
 
 # MENYN
 def Menu():
@@ -193,7 +201,8 @@ def Menu():
                 print("Ogiltigt val. Ange 1 eller 2")
         except ValueError:
             print(" ")
-            print("Fel! Ange ett giltigt tal (1 eller 2)")             
+            print("Fel! Ange ett giltigt tal 1-2")
+
 
 def Valt_rum():
     g = int(input("""
