@@ -142,18 +142,20 @@ def Room_chest():
         chest_chance = r.randint(1+2*name.luck, 20)
     if chest_chance >5 and chest_chance <21:
         if chest_chance >5 and  chest_chance<9:
-            name.add_to_inventory(Item.sword())
+            sword = create_sword()
+            name.add_to_inventory(sword)
         elif chest_chance >=9 and  chest_chance<12:
             luckybraclet = create_luckybraclet()
             name.add_to_inventory(luckybraclet)
         elif chest_chance >=12 and chest_chance<17:
-            sword = create_sword()
-            name.add_to_inventory(sword)
+            belt = create_belt()
+            name.add_to_inventory(belt)
         elif chest_chance >=17 and chest_chance<21:
             potion = create_potion()
             name.add_to_inventory(potion)
     elif chest_chance <=5:
-        name.add_to_inventory(Item.unluckyboots())
+        unluckyboots = create_unluckyboots()
+        name.add_to_inventory(unluckyboots)
 
 def Room_trap():
     print("Du öppnar dörren, och blir tagen i en fälla.\n ")
