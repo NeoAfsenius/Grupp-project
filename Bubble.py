@@ -80,8 +80,12 @@ def print_with_delay(text, delay=0.01):
         #Gå tillbaka till meny
 
 def Room_monster():
-    print("Du öppnar dörren, och ser ett monster.\n ")
-    Monster_Action = input("Vill du fly(1) eller attakera(2)? ")
+    monster_text = f"""
+Du öppnar dörren, och ser ett monster
+Vill du fly[1] eller attackera[2]
+"""
+    print_with_delay(monster_text)
+    Monster_Action = input("")
     # try:
     if Monster_Action == "1":
             Escape_monster()
@@ -161,7 +165,7 @@ def Room_chest():
 def Room_trap():
     print("Du öppnar dörren, och blir tagen i en fälla.\n ")
     damage = r.randint(5,20)/player.luck
-    player.hp =- damage
+    player.hp -= damage
     print(f"Du tog {damage} i skada")
     Alternative()
 
