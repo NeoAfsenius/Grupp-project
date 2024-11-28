@@ -211,25 +211,30 @@ def Menu():
 
 
 def Valt_rum():
-    g = int(input("""
+    try:
+        g = int(input("""
 Välj dörr
 Dörr 1:
 Dörr 2:
 Dörr 3:
 """))
-    try:
-        random_tal=r.randint(1,3)
-        if random_tal == 1:
-            Room_monster()
-        elif random_tal == 2:
-            Room_trap()
-        elif random_tal == 3:
-            Room_chest()  
-        elif random_tal < 1 or random_tal > 3:
-            print("\n Fel! Ange ett tal mellan 1-3")
-            Valt_rum()
+        # Kontrollera om input är inom rätt intervall
+        if g < 1 or g > 3:
+            print("\nFel! Ange ett tal mellan 1-3")
+            Valt_rum()  # Anropa funktionen igen
+        else:
+            # Generera ett slumpmässigt rum
+            random_tal = r.randint(1, 3)
+            if random_tal == 1:
+                Room_monster()
+            elif random_tal == 2:
+                Room_trap()
+            elif random_tal == 3:
+                Room_chest()
     except ValueError:
-        print("\n Fel! Ange ett tal mellan 1-3")
+        print("\nFel! Ange ett giltigt heltal mellan 1-3")
+        Valt_rum()  
+
 
 def game_intro():
     #Skriver backstory
