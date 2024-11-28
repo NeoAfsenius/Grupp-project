@@ -79,7 +79,6 @@ class Item:
 
 name = input("Spelarens namn: ") 
 name = Spelare(100, 10, 1, 1)
-
 room_count = 0
 
 def print_with_delay(text, delay=0.01):
