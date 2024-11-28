@@ -140,16 +140,15 @@ def Room_chest():
         chest_chance = r.randint(1+2*name.luck, 20)
     if chest_chance >5 and chest_chance <21:
         if chest_chance >5 and  chest_chance<9:
-            Item.sword()
+            name.add_to_inventory(Item.sword())
         elif chest_chance >=9 and  chest_chance<12:
-            Item.luckybraclet()
+            name.add_to_inventory(Item.luckybraclet())
         elif chest_chance >=12 and chest_chance<17:
-            Item.belt()
-
+            name.add_to_inventory(Item.belt())
         elif chest_chance >=17 and chest_chance<21:
-            Item.potion()
+            name.add_to_inventory(Item.potion())
     elif chest_chance <=5:
-        Item.unluckyboots()
+        name.add_to_inventory(Item.unluckyboots())
 
 def Room_trap():
     print("Du öppnar dörren, och blir tagen i en fälla.\n ")
@@ -210,20 +209,27 @@ Dörr 1:
 Dörr 2:
 Dörr 3:
 """))
-    random_tal=r.randint(1,3)
-    if random_tal == 1:
-        Room_monster()
-    if random_tal == 2:
-        Room_trap()
-    if random_tal == 3:
-        Room_chest()
+    try:
+        random_tal=r.randint(1,3)
+        if random_tal == 1:
+            Room_monster()
+        elif random_tal == 2:
+            Room_trap()
+        elif random_tal == 3:
+            Room_chest()  
+        elif random_tal < 1 or random_tal > 3:
+            print("\n Fel! Ange ett tal mellan 1-3")
+            Valt_rum()
+    except ValueError:
+        print("\n Fel! Ange ett tal mellan 1-3")
 
 def game_intro():
     #Skriver backstory
-    intro_text = """
-Välkommen till spelet!
-Du kommer få välja mellan att öppna dörrar som kommer kunna ha antingen monster, traps eller chests med loot som hjälper dig gå vidare
-"""
+    intro_text = f"""
+    Välkommen till spelet, {name}!
+    Du kommer få välja mellan att öppna dörrar som kan innehålla monster, fällor,
+    eller kistor med loot som hjälper dig att gå vidare.
+    """
 
     print_with_delay(intro_text)
     Alternative()
