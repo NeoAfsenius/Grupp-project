@@ -48,30 +48,30 @@ class Item:
         self.hp_bonus = health_bonus
         self.luck_bonus = luck_bonus
 
-    def sword(self):
+    def sword(self, name):
         sword = Item(2,2,0,"Svärd")
 
         name.add_to_inventory(sword)
         print(f"Ett svärd hamnade i ditt inventory")
 
-    def belt(self):
+    def belt(self, name):
         belt = Item(0,5,0,"Bälte")
 
         name.add_to_inventory(belt)
         print(f"Ett svärd hamnade i ditt inventory")
 
-    def potion(self):
+    def potion(self, name):
         potion = Item(15,0,0,"Potion")
     
         name.add_to_inventory(potion)
         print(f" potion hamnade i ditt inventory")
    
-    def luckybraclet(self):
+    def luckybraclet(self, name):
         luckybraclet = Item(0,0,2)
 
         name.add_to_inventory(luckybraclet)
         print(f"Ett armband hamnade i ditt inventory")
-    def unluckyboots(self):
+    def unluckyboots(self, name):
         unluckboots = Item(0,-10,0)
 
         name.add_to_inventory(unluckboots)
@@ -82,14 +82,13 @@ name = Spelare(100, 10, 1, 1)
 
 room_count = 0
 
-def print_with_delay(text, delay=0.005):
+def print_with_delay(text, delay=0.01):
     # Skriver text med fördröjning
     for char in text:
         sys.stdout.write(char)
         sys.stdout.flush()
         time.sleep(delay)
         #Gå tillbaka till meny
-
 
 def Room_monster():
     print("Du öppnar dörren, och ser ett monster.\n ")
@@ -124,7 +123,6 @@ def Fight_monster():
             name.luck=+ 1
             print("Du har tur och fick även +1 luck när du levlade upp!")
         Alternative()
-
 
 def Escape_monster():
     tempo_luck = name.luck
@@ -165,6 +163,7 @@ def Room_chest():
             Item.potion()
     elif chest_chance <=5:
         Item.unluckyboots()
+
 def Room_trap():
     print("Du öppnar dörren, och blir tagen i en fälla.\n ")
     damage = r.randint(10,40)/name.luck
