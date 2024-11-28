@@ -103,8 +103,8 @@ def Fight_monster():
         print("Ni är lika starka, du går vidare")
         Alternative()
     if monster_damage <= player.str:
-        player.level =+ 1
-        player.str=+ 2
+        player.level += 1
+        player.str += 2
         lucky_number = r.randint(1,7)
         
         if lucky_number%7==0:
