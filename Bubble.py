@@ -43,29 +43,30 @@ class Spelare:
         Alternative()
 
 class Item:
-    def __init__(self, strength_bonus, health_bonus, luck_bonus):
+    def __init__(self, strength_bonus, health_bonus, luck_bonus, namn):
         self.str_bonus = strength_bonus
         self.hp_bonus = health_bonus
         self.luck_bonus = luck_bonus
+        self.name = namn
 
 def create_sword():
-    return Item(2,2,0)
+    return Item(2,2,0,"sword")
 
 def create_belt():
-    return Item(0,5,0)
+    return Item(0,5,0, "belt")
 
 def create_potion():
-    return Item(15,0,0,)
+    return Item(15,0,0, "potion")
 
 def create_luckybraclet():
-    return Item(0,0,2)
+    return Item(0,0,2, "braclet")
 
 def create_unluckyboots():
-    return Item(0,-10,0)
+    return Item(0,-10,0, "boots")
 
 
-name = input("Spelarens namn: ") 
-player = Spelare(100, 10, 1, 1, name)
+player = input("Spelarens namn: ") 
+player = Spelare(100, 10, 1, 1, player)
 room_count = 0
 
 
@@ -101,7 +102,7 @@ def Fight_monster():
     elif monster_damage == player.str:
         print("Ni är lika starka, du går vidare")
         Alternative()
-    if monster_damage <= player.strr:
+    if monster_damage <= player.str:
         player.level =+ 1
         player.str=+ 2
         lucky_number = r.randint(1,7)
@@ -142,24 +143,20 @@ def Room_chest():
         chest_chance = r.randint(1+2*player.luck, 20)
     if chest_chance >5 and chest_chance <21:
         if chest_chance >5 and  chest_chance<9:
-            player.add_to_inventory(Item.sword())
             sword = create_sword()
-            name.add_to_inventory(sword)
+            player.add_to_inventory(sword)
         elif chest_chance >=9 and  chest_chance<12:
             luckybraclet = create_luckybraclet()
             player.add_to_inventory(luckybraclet)
         elif chest_chance >=12 and chest_chance<17:
-            sword = create_sword()
-            player.add_to_inventory(sword)
             belt = create_belt()
-            name.add_to_inventory(belt)
+            player.add_to_inventory(belt)
         elif chest_chance >=17 and chest_chance<21:
             potion = create_potion()
             player.add_to_inventory(potion)
     elif chest_chance <=5:
-        player.add_to_inventory(Item.unluckyboots())
         unluckyboots = create_unluckyboots()
-        name.add_to_inventory(unluckyboots)
+        player.add_to_inventory(unluckyboots)
 
 def Room_trap():
     print("Du öppnar dörren, och blir tagen i en fälla.\n ")
