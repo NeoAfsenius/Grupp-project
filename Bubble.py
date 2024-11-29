@@ -12,9 +12,7 @@ class Spelare:
         self.name = player_name
 
     def player_stats(self):
-        print(f"HP: {self.hp}, STRENGTH: {self.str}, LUCK: {self.luck}, LEVEL: {self.level}")
-        print("\n")
-        Alternative()
+        print(f"\n \n \n \n HP: {self.hp}, STRENGTH: {self.str}, LUCK: {self.luck}, LEVEL: {self.level}")
   
     def add_to_inventory(self, item):
         if len(self.inventory) < 5:
@@ -27,9 +25,6 @@ class Spelare:
 
             print("")
             
-            self.str += item.str_bonus 
-            self.hp += item.hp_bonus
-            self.luck += item.luck_bonus
             Alternative()
         else:
             print("Ditt inventory är fullt, ta bort ett item för att lägga till det nya")
@@ -103,10 +98,15 @@ Vill du fly[1] eller attackera[2]
     Monster_Action = input("")
     # try:
     if Monster_Action == "1":
-            Escape_monster()
-
+        Escape_monster()
     elif Monster_Action == "2":
-            Fight_monster()
+        Fight_monster()
+    elif Monster_Action != "1" or  Monster_Action != "2":
+        print("\n\n\n\n")
+        print("Error, Du måste skriva 1 eller 2")
+        Room_monster()
+        
+
     # except:
     #     print("Error, try again")
 
@@ -256,7 +256,8 @@ def Room_trap():
 # ALTERNATIV 
 def Alternative():
     if player.hp > 0:
-        print(" [1] - Välj mellan 3 dörrar \n [2] - Öppna inventory \n [3] - Meny \n [4] - Se Stats \n ")
+        player.player_stats()
+        print(" \n [1] - Välj mellan 3 dörrar \n [2] - Öppna inventory \n [3] - Meny \n ")
         try:
             Answer = int(input("Ange vad du vill göra nu: "))
             if Answer == 1:
@@ -265,11 +266,8 @@ def Alternative():
                 player.show_inventory()
             elif Answer == 3:
                 Menu()
-            elif Answer == 4:
-                print("\n \n \n")
-                player.player_stats()
-            elif Answer < 1 or Answer > 4:
-                print("\n Fel! Ange ett giltigt tal 1-4")
+            elif Answer < 1 or Answer > 3:
+                print("\n Fel! Ange ett giltigt tal 1-3")
                 Alternative()
         except ValueError:
             print("\n Fel! Ange ett giltigt tal 1-4")
@@ -305,6 +303,7 @@ def Valt_rum():
     try:
         g = int(input("""
 \n \n \n \n \n
+Välj vilken dörr du vill öppna.
 [1] - Blå dörr
 [2] - Röd dörr
 [3] - Grön dörr
@@ -324,7 +323,7 @@ Ange dörr: """))
             elif random_tal == 3:
                 Room_chest()
     except ValueError:
-        print("\nFel! Ange ett giltigt heltal mellan 1-3")
+        print("\nFel! Ange ett giltigt tal 1-3")
         Valt_rum()  
 
 
@@ -338,6 +337,10 @@ eller kistor med loot som hjälper dig att gå vidare.
 """
 
     print_with_delay(intro_text)
-    Alternative()
+    starta = int(input("Vill starta spelet \n [1] - Ja \n [2] - Nej \n \n Ange ditt val: "))
+    if starta == 1: 
+        Alternative()
+    elif starta == 2:
+        print("hejdå")
 
 game_intro()
