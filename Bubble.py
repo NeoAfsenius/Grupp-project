@@ -29,7 +29,8 @@ class Spelare:
             
             Alternative()
         else:
-            print("Ditt inventory är fullt, ta bort ett item för att lägga till det nya")
+            inventory_full()
+
             print("")
             Alternative()
 
@@ -81,7 +82,17 @@ print(" ")
 player = Spelare(100, 10, 1, 1, player)
 room_count = 0
 
+def inventory_full():
+    inventory_remove_check = input("Ditt inventory är fullt, ta bort ett item för att lägga till det nya\n [1] - Ta bort ett item \n[2] - Gå vidare")
+    if inventory_remove_check == "1":
+        chosen_removal = input("Vilket nummer på item vill du ta bort")
+        player.remove_from_inventory(player.inventory[chosen_removal-1])
+    elif inventory_remove_check == "2":
+        Alternative()
+    elif inventory_remove_check != "1" or inventory_remove_check != "2":
+        print("Error, skriv in 1 eller 2")
 
+    
 
 def print_with_delay(text, delay=0.01):
     # Skriver text med fördröjning
