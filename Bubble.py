@@ -103,10 +103,15 @@ Vill du fly[1] eller attackera[2]
     Monster_Action = input("")
     # try:
     if Monster_Action == "1":
-            Escape_monster()
-
+        Escape_monster()
     elif Monster_Action == "2":
-            Fight_monster()
+        Fight_monster()
+    elif Monster_Action != "1" or  Monster_Action != "2":
+        print("\n\n\n\n")
+        print("Error, Du måste skriva 1 eller 2")
+        Room_monster()
+        
+
     # except:
     #     print("Error, try again")
 
