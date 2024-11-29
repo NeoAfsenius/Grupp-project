@@ -73,7 +73,7 @@ def create_luckybraclet():
     return Item(0,0,2, "braclet")
 
 def create_unluckyboots():
-    return Item(0,0,-10, "boots")
+    return Item(0,0,0, "boots")
 
 
 player = input("Spelarens namn: ") 
@@ -138,10 +138,14 @@ def Escape_monster():
 
     print("Du försöker fly")
     if Escape_chance >= 5:
-        print("Du lyckades att fly från monstret ")
+        print("""
+              Du smyger runt dörren och lyckas att inte bli sedd. Men du är nu tillbaka i ett rum som ser likadant ut!
+              """)
         Alternative()
     elif Escape_chance < 5:
-        print("Du lyckades inte att fly från monstret och därför tog du skada")
+        print("""
+              Du försöker smyga runt hörnet men monstret hittat dig och skadar dig!
+              """)
         escape_damage = r.randint(10 , 20-(player.luck))
         player.hp=player.hp - escape_damage
         print("Du tog " + str(escape_damage) + " Skada")
