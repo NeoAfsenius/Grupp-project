@@ -145,20 +145,28 @@ def Escape_monster():
     player.luck = tempo_luck
     escape_damage = r.randint(1+(3*player.level), 10+(3*player.level))
 
-    print("Du försöker fly")
     if Escape_chance >= 5:
-        print("""
-              Du smyger runt dörren och lyckas att inte bli sedd. Men du är nu tillbaka i ett rum som ser likadant ut!
-              """)
+        escape_text=("""
+Du smyger runt dörren och lyckas att inte bli sedd!
+Men du är nu tillbaka i ett rum som ser likadant ut!
+""")
+        print_with_delay(escape_text)
         Alternative()
     elif Escape_chance < 5:
-        print("""
-              Du försöker smyga runt hörnet men monstret hittat dig och skadar dig!
-              """)
+        failescape_text=("""
+Du försöker smyga runt hörnet men monstret hittat dig och skadar dig!
+""")
+        print_with_delay(failescape_text)
         escape_damage = r.randint(10 , 20-(player.luck))
         player.hp=player.hp - escape_damage
-        print("Du tog " + str(escape_damage) + " Skada")
-        print("Du har nu " + str(player.hp) +  "HP")
+        dmg_taken=f"""
+Du tog {escape_damage} Skada
+"""
+        print_with_delay(dmg_taken)
+        dmg_left=(f"""
+Du har nu {player.hp} hp
+""")
+        print_with_delay(dmg_left)
         Alternative()
 
 def Room_chest():
