@@ -59,6 +59,8 @@ class Item:
         self.hp_bonus = health_bonus
         self.luck_bonus = luck_bonus
         self.name = namn
+
+    #Gör så att itemnamnet kan läsas av,
     def __str__(self):
         return f"{self.name} (STR: {self.str_bonus}, HP: {self.hp_bonus}, LUCK: {self.luck_bonus})"
 def create_sword():
