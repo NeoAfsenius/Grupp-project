@@ -48,7 +48,8 @@ class Item:
         self.hp_bonus = health_bonus
         self.luck_bonus = luck_bonus
         self.name = namn
-
+    def __str__(self):
+        return f"{self.name} (STR: {self.str_bonus}, HP: {self.hp_bonus}, LUCK: {self.luck_bonus})"
 def create_sword():
     return Item(2,2,0,"sword")
 
@@ -62,7 +63,7 @@ def create_luckybraclet():
     return Item(0,0,2, "braclet")
 
 def create_unluckyboots():
-    return Item(0,-10,0, "boots")
+    return Item(0,0,-10, "boots")
 
 
 player = input("Spelarens namn: ") 
@@ -141,10 +142,13 @@ def Room_chest():
     print("Du öppnar dörren, och ser en kista.\n ")
 
     #Nödvädnigt med try?
+    # Bestäm chansen baserat på spelarens tur
     if player.luck == 1:
         chest_chance = r.randint(1, 20)
-    elif player.luck == 2: 
-        chest_chance = r.randint(1+2*player.luck, 20)
+    elif player.luck >= 2: 
+        chest_chance = r.randint(1 + 2 * player.luck, 20)
+
+
     if chest_chance >5 and chest_chance <21:
         if chest_chance >5 and  chest_chance<9:
             sword = create_sword()
@@ -161,6 +165,12 @@ def Room_chest():
     elif chest_chance <=5:
         unluckyboots = create_unluckyboots()
         player.add_to_inventory(unluckyboots)
+
+    player.add_to_inventory(Item)
+    player.str += Item.str_bonus
+    player.hp += Item.hp_bonus
+    player.luck += Item.luck_bonus
+
 
 def Room_trap():
     print("Du öppnar dörren, och blir tagen i en fälla.\n ")
