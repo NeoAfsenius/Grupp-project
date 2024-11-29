@@ -12,7 +12,7 @@ class Spelare:
         self.name = player_name
 
     def player_stats(self):
-        print(f"HP: {self.hp}, STRENGTH: {self.str}, LUCK: {self.luck}, LEVEL: {self.level}")
+        print(f"\n \n \n \n HP: {self.hp}, STRENGTH: {self.str}, LUCK: {self.luck}, LEVEL: {self.level}")
   
     def add_to_inventory(self, item):
         if len(self.inventory) < 5:
@@ -101,10 +101,15 @@ Vill du fly[1] eller attackera[2]
     Monster_Action = input("")
     # try:
     if Monster_Action == "1":
-            Escape_monster()
-
+        Escape_monster()
     elif Monster_Action == "2":
-            Fight_monster()
+        Fight_monster()
+    elif Monster_Action != "1" or  Monster_Action != "2":
+        print("\n\n\n\n")
+        print("Error, Du måste skriva 1 eller 2")
+        Room_monster()
+        
+
     # except:
     #     print("Error, try again")
 
@@ -138,20 +143,28 @@ def Escape_monster():
     player.luck = tempo_luck
     escape_damage = r.randint(1+(3*player.level), 10+(3*player.level))
 
-    print("Du försöker fly")
     if Escape_chance >= 5:
-        print("""
-              Du smyger runt dörren och lyckas att inte bli sedd. Men du är nu tillbaka i ett rum som ser likadant ut!
-              """)
+        escape_text=("""
+Du smyger runt dörren och lyckas att inte bli sedd!
+Men du är nu tillbaka i ett rum som ser likadant ut!
+""")
+        print_with_delay(escape_text)
         Alternative()
     elif Escape_chance < 5:
-        print("""
-              Du försöker smyga runt hörnet men monstret hittat dig och skadar dig!
-              """)
+        failescape_text=("""
+Du försöker smyga runt hörnet men monstret hittat dig och skadar dig!
+""")
+        print_with_delay(failescape_text)
         escape_damage = r.randint(10 , 20-(player.luck))
         player.hp=player.hp - escape_damage
-        print("Du tog " + str(escape_damage) + " Skada")
-        print("Du har nu " + str(player.hp) +  "HP")
+        dmg_taken=f"""
+Du tog {escape_damage} Skada
+"""
+        print_with_delay(dmg_taken)
+        dmg_left=(f"""
+Du har nu {player.hp} hp
+""")
+        print_with_delay(dmg_left)
         Alternative()
 
 def Room_chest():
@@ -196,7 +209,7 @@ def Room_trap():
 def Alternative():
     if player.hp > 0:
         player.player_stats()
-        print(" [1] - Välj mellan 3 dörrar \n [2] - Öppna inventory \n [3] - Meny \n [4] - Se Stats \n ")
+        print(" \n [1] - Välj mellan 3 dörrar \n [2] - Öppna inventory \n [3] - Meny \n ")
         try:
             Answer = int(input("Ange vad du vill göra nu: "))
             if Answer == 1:
@@ -205,11 +218,8 @@ def Alternative():
                 player.show_inventory()
             elif Answer == 3:
                 Menu()
-            elif Answer == 4:
-                print("\n \n \n")
-                player.player_stats()
-            elif Answer < 1 or Answer > 4:
-                print("\n Fel! Ange ett giltigt tal 1-4")
+            elif Answer < 1 or Answer > 3:
+                print("\n Fel! Ange ett giltigt tal 1-3")
                 Alternative()
         except ValueError:
             print("\n Fel! Ange ett giltigt tal 1-4")
@@ -279,6 +289,10 @@ eller kistor med loot som hjälper dig att gå vidare.
 """
 
     print_with_delay(intro_text)
-    Alternative()
+    starta = int(input("Vill starta spelet \n [1] - Ja \n [2] - Nej \n \n Ange ditt val: "))
+    if starta == 1: 
+        Alternative()
+    elif starta == 2:
+        print("hejdå")
 
 game_intro()
