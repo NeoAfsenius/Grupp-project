@@ -13,8 +13,6 @@ class Spelare:
 
     def player_stats(self):
         print(f"HP: {self.hp}, STRENGTH: {self.str}, LUCK: {self.luck}, LEVEL: {self.level}")
-        print("\n")
-        Alternative()
   
     def add_to_inventory(self, item):
         if len(self.inventory) < 5:
@@ -197,6 +195,7 @@ def Room_trap():
 # ALTERNATIV 
 def Alternative():
     if player.hp > 0:
+        player.player_stats()
         print(" [1] - Välj mellan 3 dörrar \n [2] - Öppna inventory \n [3] - Meny \n [4] - Se Stats \n ")
         try:
             Answer = int(input("Ange vad du vill göra nu: "))
@@ -246,6 +245,7 @@ def Valt_rum():
     try:
         g = int(input("""
 \n \n \n \n \n
+Välj vilken dörr du vill öppna.
 [1] - Blå dörr
 [2] - Röd dörr
 [3] - Grön dörr
@@ -265,7 +265,7 @@ Ange dörr: """))
             elif random_tal == 3:
                 Room_chest()
     except ValueError:
-        print("\nFel! Ange ett giltigt heltal mellan 1-3")
+        print("\nFel! Ange ett giltigt tal 1-3")
         Valt_rum()  
 
 
