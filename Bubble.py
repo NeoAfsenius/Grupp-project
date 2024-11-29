@@ -177,6 +177,7 @@ def Room_trap():
     damage = r.randint(5,20)/player.luck
     player.hp -= damage
     print(f"Du tog {damage} i skada")
+    print(f"Du har nu {player.hp} hp kvar!")
     Alternative()
 
 # ALTERNATIV 
