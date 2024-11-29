@@ -19,6 +19,11 @@ class Spelare:
         if len(self.inventory) < 5:
             self.inventory.append(item)
             print(f"Du la till {item} i ditt inventory")
+
+            self.str += item.str_bonus
+            self.hp += item.hp_bonus
+            self.luck += item.luck_bonus
+
             print("")
             Alternative()
         else:
