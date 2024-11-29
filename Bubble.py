@@ -25,9 +25,6 @@ class Spelare:
 
             print("")
             
-            self.str += item.str_bonus 
-            self.hp += item.hp_bonus
-            self.luck += item.luck_bonus
             Alternative()
         else:
             print("Ditt inventory är fullt, ta bort ett item för att lägga till det nya")
