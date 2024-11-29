@@ -225,12 +225,12 @@ def Menu():
         try:
             MenuAnswer = int(input("Ange ditt val här: "))
             if MenuAnswer == 1:
-                print("Återupptar spelet..")
+                print("\n \n \n \n Återupptar spelet..")
                 print(" ")
                 MenuLoop = MenuLoop + 2
                 Alternative()
             elif MenuAnswer == 2:
-                print("Avslutar spelet..")
+                print("\nAvslutar spelet..\n")
                 break 
             else:
                 print(" ")
@@ -243,11 +243,12 @@ def Menu():
 def Valt_rum():
     try:
         g = int(input("""
-Välj dörr
-Dörr 1:
-Dörr 2:
-Dörr 3:
-"""))
+\n \n \n \n \n
+[1] - Blå dörr
+[2] - Röd dörr
+[3] - Grön dörr
+
+Ange dörr: """))
         # Kontrollera om input är inom rätt intervall
         if g < 1 or g > 3:
             print("\nFel! Ange ett tal mellan 1-3")
