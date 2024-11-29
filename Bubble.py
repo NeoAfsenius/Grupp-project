@@ -142,7 +142,7 @@ Du gör en lätt attack på honom och skadar honom
         monster_hp = monster_hp-light_attack
     elif monster_choice ==2:
         heavy_attack = r.randint(40+(player.str),50+(player.str))
-        attack_chance=r.random(1,5)
+        attack_chance=r.randint(1,5)
         if attack_chance==5:
             print("Du slår hårt men missar! ")
         elif attack_chance<5:
