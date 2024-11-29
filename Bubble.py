@@ -13,6 +13,7 @@ class Spelare:
 
     def player_stats(self):
         print(f"HP: {self.hp}, STRENGTH: {self.str}, LUCK: {self.luck}, LEVEL: {self.level}")
+        print("\n")
         Alternative()
   
     def add_to_inventory(self, item):
@@ -58,6 +59,8 @@ class Item:
         self.hp_bonus = health_bonus
         self.luck_bonus = luck_bonus
         self.name = namn
+
+    #Gör så att itemnamnet kan läsas av,
     def __str__(self):
         return f"{self.name} (STR: {self.str_bonus}, HP: {self.hp_bonus}, LUCK: {self.luck_bonus})"
 def create_sword():
@@ -77,6 +80,7 @@ def create_unluckyboots():
 
 
 player = input("Spelarens namn: ") 
+print(" ")
 player = Spelare(100, 10, 1, 1, player)
 room_count = 0
 
@@ -201,7 +205,7 @@ def Room_trap():
 # ALTERNATIV 
 def Alternative():
     if player.hp > 0:
-        print(" [1] - Välj mellan 3 dörrar. \n [2] - Öppna inventory. \n [3] - Meny. \n [4] - Se Stats \n ")
+        print(" [1] - Välj mellan 3 dörrar \n [2] - Öppna inventory \n [3] - Meny \n [4] - Se Stats \n ")
         try:
             Answer = int(input("Ange vad du vill göra nu: "))
             if Answer == 1:
@@ -211,6 +215,7 @@ def Alternative():
             elif Answer == 3:
                 Menu()
             elif Answer == 4:
+                print("\n \n \n")
                 player.player_stats()
             elif Answer < 1 or Answer > 4:
                 print("\n Fel! Ange ett giltigt tal 1-4")
@@ -225,17 +230,17 @@ def Alternative():
 def Menu():
     MenuLoop = 1
     while MenuLoop != 3:
-        print("\n [1] - Återuppta spelet \n [2] - Avsluta spelet")
+        print("\n \n \n \n \n \n \n [1] - Återuppta spelet \n [2] - Avsluta spelet \n ")
         
         try:
             MenuAnswer = int(input("Ange ditt val här: "))
             if MenuAnswer == 1:
-                print("Återupptar spelet..")
+                print("\n \n \n \n Återupptar spelet..")
                 print(" ")
                 MenuLoop = MenuLoop + 2
                 Alternative()
             elif MenuAnswer == 2:
-                print("Avslutar spelet..")
+                print("\nAvslutar spelet..\n")
                 break 
             else:
                 print(" ")
@@ -248,11 +253,12 @@ def Menu():
 def Valt_rum():
     try:
         g = int(input("""
-Välj dörr
-Dörr 1:
-Dörr 2:
-Dörr 3:
-"""))
+\n \n \n \n \n
+[1] - Blå dörr
+[2] - Röd dörr
+[3] - Grön dörr
+
+Ange dörr: """))
         # Kontrollera om input är inom rätt intervall
         if g < 1 or g > 3:
             print("\nFel! Ange ett tal mellan 1-3")
@@ -277,6 +283,7 @@ def game_intro():
 Välkommen till spelet, {player.name}!
 Du kommer få välja mellan att öppna dörrar som kan innehålla monster, fällor,
 eller kistor med loot som hjälper dig att gå vidare.
+
 """
 
     print_with_delay(intro_text)
