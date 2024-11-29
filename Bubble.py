@@ -24,11 +24,9 @@ class Spelare:
             self.luck += item.luck_bonus
 
             print("")
-            
             Alternative()
         else:
             inventory_full()
-
             print("")
             Alternative()
 
@@ -75,8 +73,8 @@ def create_unluckyboots():
     return Item(0,0,0, "boots")
 
 
-player = input("Spelarens namn: ") 
-print(" ")
+player = input("Spelarens namn: ")
+print("") 
 player = Spelare(100, 10, 1, 1, player)
 room_count = 0
 
@@ -353,5 +351,5 @@ eller kistor med loot som hjälper dig att gå vidare.
         Alternative()
     elif starta == 2:
         print("hejdå")
-
+        
 game_intro()
