@@ -157,6 +157,9 @@ def Room_chest():
         chest_chance = r.randint(1, 20)
     elif player.luck >= 2: 
         chest_chance = r.randint(1 + 2 * player.luck, 20)
+    elif player.luck < 1:
+        chest_chance = r.randint(1, 20)
+    
 
 
     if chest_chance >5 and chest_chance <21:
