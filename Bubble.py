@@ -25,12 +25,16 @@ class Spelare:
             self.luck += item.luck_bonus
 
             print("")
+            
+            self.str += item.str_bonus 
+            self.hp += item.hp_bonus
+            self.luck += item.luck_bonus
             Alternative()
         else:
             print("Ditt inventory är fullt, ta bort ett item för att lägga till det nya")
             print("")
             Alternative()
-    
+
     def remove_from_inventory(self, item):
         if len(self.inventory) <= 5:
             self.inventory.remove(item)
@@ -43,7 +47,8 @@ class Spelare:
             Alternative()
 
     def show_inventory(self):
-        print(self.inventory) 
+        for item in self.inventory:
+            print(item)
         print("")
         Alternative()
 
@@ -56,7 +61,7 @@ class Item:
     def __str__(self):
         return f"{self.name} (STR: {self.str_bonus}, HP: {self.hp_bonus}, LUCK: {self.luck_bonus})"
 def create_sword():
-    return Item(2,2,0,"sword")
+    return Item(r.randint(1,10),r.randint(1,10),0,"sword")
 
 def create_belt():
     return Item(0,5,0, "belt")
@@ -170,18 +175,12 @@ def Room_chest():
     elif chest_chance <=5:
         unluckyboots = create_unluckyboots()
         player.add_to_inventory(unluckyboots)
-
-    player.add_to_inventory(Item)
-    player.str += Item.str_bonus
-    player.hp += Item.hp_bonus
-    player.luck += Item.luck_bonus
-
-
 def Room_trap():
     print("Du öppnar dörren, och blir tagen i en fälla.\n ")
     damage = r.randint(5,20)/player.luck
     player.hp -= damage
     print(f"Du tog {damage} i skada")
+    print(f"Du har nu {player.hp} hp kvar!")
     Alternative()
 
 # ALTERNATIV 
@@ -204,7 +203,7 @@ def Alternative():
         except ValueError:
             print("\n Fel! Ange ett giltigt tal 1-4")
             Alternative()
-    if player.hp < 0: 
+    if player.hp <= 0: 
         print("Du förlorade!")
 
 # MENYN
