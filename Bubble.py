@@ -24,9 +24,11 @@ class Spelare:
             self.luck += item.luck_bonus
 
             print("")
+            
             Alternative()
         else:
             inventory_full()
+
             print("")
             Alternative()
 
@@ -73,8 +75,8 @@ def create_unluckyboots():
     return Item(0,0,0, "boots")
 
 
-player = input("Spelarens namn: ")
-print("") 
+player = input("Spelarens namn: ") 
+print(" ")
 player = Spelare(100, 10, 1, 1, player)
 room_count = 0
 
@@ -118,10 +120,25 @@ Vill du fly[1] eller attackera[2]
 
     # except:
     #     print("Error, try again")
+def game_intro():
+    #Skriver backstory
+    intro_text = f"""
+Välkommen till spelet, {player.name}!
+Du kommer få välja mellan att öppna dörrar som kan innehålla monster, fällor,
+eller kistor med loot som hjälper dig att gå vidare.
+
+"""
+
+    print_with_delay(intro_text)
+    starta = int(input("Vill starta spelet \n [1] - Ja \n [2] - Nej \n \n Ange ditt val: "))
+    if starta == 1: 
+        Alternative()
+    elif starta == 2:
+        print("hejdå")
 
 def Fight_monster():
-    monster_hp = r.randint(50+(5*player.level), 100+(5*player.level))
-    monster_choice=int(input("""
+    monster_hp=r.randint(50 + (5 * player.level), 100 + (5 * player.level))
+    print("""
        ____  ____
      /          o  
     |   ( )   ( )   | 
@@ -139,58 +156,97 @@ def Fight_monster():
           
 
 Du möter ett monster!
-Vad vill du göra
-[1] En lätt attack [2] En tung attack [3] Försöka undvika hans attack
-->
-"""))
-    if monster_choice == 1:
-        light_attack = r.randint(20+(player.str),30+(player.str))
-        print(f"""
-Du gör en lätt attack på honom och skadar honom 
 """)
-        monster_hp = monster_hp-light_attack
-    elif monster_choice ==2:
-        heavy_attack = r.randint(40+(player.str),50+(player.str))
-        attack_chance=r.randint(1,5)
-        if attack_chance==5:
-            print("Du slår hårt men missar! ")
-        elif attack_chance<5:
-            print(f"""
-Du slår hårt och och träffar.
-Du gör {heavy_attack} damage på monstret
-""")
-            monster_hp=monster_hp-heavy_attack
-    elif monster_choice == 3:
-        dodge_chance=r.random(1,5)
-        if dodge_chance==5:
-            monster_damage = r.randint(1+(2*player.level), 10+(2*player.level))
-            print(f"""
-Du försöker undvika men du blir träffad och tar {monster_choice} damage
-""")
-        elif dodge_chance<=5:
-            print(f"""
-Du undviker honom och får ett till försök
-""")
+    while player.hp>0:
+            while monster_hp>0:
+                player_choice=int(input("""
+    Vad vill du göra:
+    [1] En lätt attack [2] En tung attack
+    ->
+    """))
 
-    # if monster_damage >= player.str:
-    #     player.hp = player.hp-2*monster_damage
-    #     print("Du förlorade och tog skada")
-    #     print(f"Du har nu {player.hp} Hp")
-    #     print("")
-    #     Alternative()
-    # elif monster_damage == player.str:
-    #     print("Ni är lika starka, du går vidare")
-    #     Alternative()
-    # if monster_damage <= player.str:
-    #     player.level = player.level + 1
-    #     player.str= player.str + 2
-    #     lucky_number = r.randint(1,7)
-    #     print("Du vann över monstret och gick upp i Level och din str gick upp 2 enheter")
-    #     if lucky_number%7==0:
-    #         player.luck=+ 1
-    #         print("Du har tur och fick även +1 luck när du levlade upp!")
-    #     Alternative()
-
+                if player_choice == 1:
+                    light_attack = r.randint(20+(player.str),30+(player.str))
+                    print(f"""
+    Du gör en lätt attack på honom och skadar honom {light_attack}hp
+    """)
+                    monster_hp = monster_hp-light_attack
+                elif player_choice ==2:
+                    heavy_attack = r.randint(40+(player.str),50+(player.str))
+                    attack_chance=r.randint(1,5)
+                    if attack_chance==5:
+                        print("Du slår hårt men missar! ")
+                    elif attack_chance<5:
+                        print(f"""
+    Du slår hårt och och träffar.
+    Du gör {heavy_attack} damage på monstret
+    """)
+                        monster_hp=monster_hp-heavy_attack
+                monster_attack = r.randint(1,2)
+                if monster_attack==1:
+                    monster_light= r.randint(1+(player.level), 10+(player.level))
+                    player.hp=player.hp-monster_light
+                    print(f"""
+    Monstret slår dig med en en snabb och lätt attack och skadar dig {monster_light}hp
+    """ )
+                elif monster_attack==2:
+                    monster_heavy= r.randint(1+(2*player.level), 10+(2*player.level))
+                    dodge_choice=int(input("""
+    monstret slår dig med en tung och långsamm attack. Vill du undvika?
+    [1] JA [2] NEJ)
+    -->
+    """))
+                    if dodge_choice == 1:
+                        dodge_chance=r.randint(1,5)
+                        if dodge_chance==5:
+                            monster_heavy = r.randint(1+(2*player.level), 10+(2*player.level))
+                            print(f"""
+    Du försöker undvika men du blir träffad och tar {monster_heavy} damage
+    """)
+                        elif dodge_chance<=5:
+                            print(f"""
+    Du undviker honom och får ett till försök
+    """)
+                    elif dodge_choice == 2:
+                        player.hp=player.hp-heavy_attack
+                        print(f"""
+    Du blir träffad och tar {heavy_attack}
+    """)
+            lucky_number = r.randint(1,7)
+            print("Du vann över monstret och gick upp i Level och din str gick upp 2 enheter")
+            player.level+=1
+            player.str+=2
+            if lucky_number%7==0:
+                player.luck=+ 1
+                print("Du har tur och fick även +1 luck när du levlade upp!")
+            Alternative()
+    dead=int(input("""
+    Du dog!
+    Vill du börja om?
+    JA[1] NEJ[2]
+    """))
+    if dead == 1:
+        game_intro()
+    if dead == 2:
+        ("Du avslutade spelet")
+        # if monster_damage >= player.str:
+        #     player.hp = player.hp-2*monster_damage
+        #     print("Du förlorade och tog skada")
+        #     print(f"Du har nu {player.hp} Hp")
+        #     print("")
+        #     Alternative()
+        # elif monster_damage == player.str:
+        #     print("Ni är lika starka, du går vidare")
+        #     Alternative()
+        # if monster_damage <= player.str:
+        #     player.level = player.level + 1
+        #     player.str= player.str + 2
+        #     lucky_number = r.randint(1,7)
+        #     print("Du vann över monstret och gick upp i Level och din str gick upp 2 enheter")
+        #     if lucky_number%7==0:
+        #         player.luck=+ 1
+        #         print("Du har tur och fick även +1 luck när du levlade upp!")
+        #     Alternative()
 def Escape_monster():
     tempo_luck = player.luck
     if player.luck >= 9:
@@ -335,21 +391,4 @@ Ange dörr: """))
         print("\nFel! Ange ett giltigt tal 1-3")
         Valt_rum()  
 
-
-def game_intro():
-    #Skriver backstory
-    intro_text = f"""
-Välkommen till spelet, {player.name}!
-Du kommer få välja mellan att öppna dörrar som kan innehålla monster, fällor,
-eller kistor med loot som hjälper dig att gå vidare.
-
-"""
-
-    print_with_delay(intro_text)
-    starta = int(input("Vill starta spelet \n [1] - Ja \n [2] - Nej \n \n Ange ditt val: "))
-    if starta == 1: 
-        Alternative()
-    elif starta == 2:
-        print("hejdå")
-        
 game_intro()
