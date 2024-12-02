@@ -81,7 +81,7 @@ room_count = 0
 def inventory_full():
     inventory_remove_check = input("Ditt inventory är fullt, ta bort ett item för att lägga till det nya\n [1] - Ta bort ett item \n[2] - Gå vidare")
     if inventory_remove_check == "1":
-        chosen_removal = input("Vilket nummer på item vill du ta bort")
+        chosen_removal = int(input("Vilket nummer på item vill du ta bort"))
         player.remove_from_inventory(player.inventory[chosen_removal-1])
     elif inventory_remove_check == "2":
         Alternative()
