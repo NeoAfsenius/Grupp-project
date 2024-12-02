@@ -81,9 +81,20 @@ room_count = 0
 
 def inventory_full():
     inventory_remove_check = input("Ditt inventory är fullt, ta bort ett item för att lägga till det nya\n [1] - Ta bort ett item \n[2] - Gå vidare")
+    chosen_removal = int(input("Vilket nummer på item vill du ta bort"))
+
     if inventory_remove_check == "1":
-        chosen_removal = int(input("Vilket nummer på item vill du ta bort"))
-        player.remove_from_inventory(player.inventory[chosen_removal-1])
+        player.show_inventory() #visar inventory
+        print("")
+
+        if 1 <= chosen_removal <= len(player.inventory): #Om valet är mindre än 1 dvs index blir minus 1, eller om siffran blir större än största index så får man välja igen pga annars blir det index error
+            player.remove_from_inventory(player.inventory[chosen_removal-1])
+
+            #Gå tillbaka till lägga till item
+
+        else:
+            print("Error, Försök igen")
+            inventory_full()
     elif inventory_remove_check == "2":
         Alternative()
     elif inventory_remove_check != "1" or inventory_remove_check != "2":
