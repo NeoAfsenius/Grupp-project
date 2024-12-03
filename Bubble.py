@@ -167,8 +167,10 @@ def Fight_monster():
 
 Du möter ett monster!
 """)
-    while player.hp>0: #Säger att så länge man lever forstätter striden
-        while monster_hp>0: #Säger att så länge monstret lever forstätter striden
+    while monster_hp>0: #Säger att så länge monstret lever forstätter striden
+        if player.hp<0:
+                dead()
+        else:
             try:
                 player_choice=int(input("""
 Vad vill du göra:
@@ -249,7 +251,6 @@ Du blir träffad och tar {heavy_attack}
                     player.luck+=1
                     print("Du har tur och fick även +1 luck när du levlade upp!")
                 Alternative()
-    print("Du dog!")
     try:
         dead = int(input("Vill du börja om? [1] JA [2] NEJ\n-> "))
         if dead == 1:
@@ -422,5 +423,16 @@ Ange dörr: """))
     except ValueError:
         print("\nFel! Ange ett giltigt tal 1-3")
         Valt_rum()  
+
+def dead():
+    print("Du dog!")
+    val=int(input("Vill du fortsätta [1] Ja [2] Nej"))
+    try:
+        if val==1:
+            game_intro
+        elif val==2:
+            print("Hejdå")
+    except ValueError:
+        print("Välj mellan 1 eller 2")
 
 game_intro()
