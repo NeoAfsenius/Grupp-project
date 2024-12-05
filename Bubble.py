@@ -140,14 +140,15 @@ eller kistor med loot som hjälper dig att gå vidare.
 """
     print_with_delay(intro_text)
     starta = input("Vill starta spelet \n [1] - Ja \n [2] - Nej \n \n Ange ditt val: ")
-
-    if starta == "1" or starta == "Ja" or starta == "ja": 
-        Alternative()
-    elif starta == "2" or starta == "Nej" or starta == "nej":
-        print("hejdå")
-    elif starta != 1 and starta != 2:
-        print("Error, välj [1] eller [2]")
-        starta = input("Vill starta spelet \n [1] - Ja \n [2] - Nej \n \n Ange ditt val: ")
+    while True:
+        if starta == "1" or starta == "Ja" or starta == "ja": 
+            Alternative()
+        elif starta == "2" or starta == "Nej" or starta == "nej":
+            print("hejdå")
+            break
+        elif starta != 1 and starta != 2:
+            print("Error, välj [1] eller [2]")
+            starta = input("Vill starta spelet \n [1] - Ja \n [2] - Nej \n \n Ange ditt val: ")
 
 def Fight_monster():
     monster_hp=r.randint(50 + (10 * player.level), 100 + (10 * player.level)) #Skapar monstrets hp
