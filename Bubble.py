@@ -343,8 +343,8 @@ def Room_trap():
 
 # ALTERNATIV 
 def Alternative():
-    if player.level == 10:
-        print("Grattis du klarade dig till level 5 och klarade spelet!")
+    if player.level == 5:
+        print("\n\n\n\n\n\n\n\n Grattis du klarade dig till level 5 och klarade spelet!")
         vinnare()
     elif player.hp > 0:
         player.player_stats()
@@ -430,18 +430,22 @@ def dead():
 
 
 def vinnare():
-    play_again = int(input("Vill du spela igen? \n[1] - Ja \n[2] - Nej\n--> "))
-    try:
-        if play_again == 1:
-            print("Startar spelet..")
-            game_intro()
-        elif play_again == 2:
-            print("Avslutar spelet..")
-        elif play_again < 1 or play_again > 2:
-            print("Fel! Välj mellan [1] eller [2].")
-            vinnare()
-    except ValueError:
-        print("Fel! Välj mellan [1] eller [2].")
-        vinnare()
+        while True:
+            try:
+                play_again = int(input("Vill du spela igen? \n[1] - Ja \n[2] - Nej\n--> "))
+            
+                if play_again == 1:
+                    print("Startar spelet..")
+                    game_intro()
+                    break
+                elif play_again == 2:
+                    print("Avslutar spelet..")
+                    break
+                elif play_again < 1 or play_again > 2:
+                    print("Fel! Välj mellan [1] eller [2].")
+                    vinnare()
+            except ValueError:
+                print("Fel! Välj mellan [1] eller [2].")
+                vinnare()
 
 game_intro()
