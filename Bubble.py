@@ -130,7 +130,7 @@ Vill du fly[1] eller attackera[2]
         Fight_monster()
     elif Monster_Action != "1" or  Monster_Action != "2":
         print("\n\n\n\n")
-        print("Error, Du måste skriva 1 eller 2")
+        print("Fel! Ange ett giltigt tal mellan [1], [2].")
         Room_monster()
         
 
@@ -185,9 +185,9 @@ Du möter ett monster!
             try:
                 player_choice=int(input("""
 Vad vill du göra:
-[1] En lätt attack [2] En tung attack
-->
-"""))
+[1] En lätt attack 
+[2] En tung attack
+-> """))
                 #Här börjar spelaren attack!
                 if player_choice == 1: #Säger att om du gör en lätt attack är det baserat på strength
                     light_attack = r.randint(20+(player.str),30+(player.str))
@@ -208,7 +208,7 @@ Du gör {heavy_attack} damage på monstret
 """)
                         monster_hp=monster_hp-heavy_attack
                 else:
-                    print("Fel! Välj 1 eller 2.")
+                    print("Fel! Välj ett giltigt tal mellan [1], [2].")
                     continue  # Hoppa över resten av loopen
 
                 #Här börjar monstrets attack!
@@ -230,9 +230,9 @@ Monstret slår dig med en en snabb och lätt attack och skadar dig {monster_ligh
                         while True:
                             dodge_choice=int(input("""
 Monstret slår dig med en tung och långsamm attack. Vill du undvika?
-[1] JA [2] NEJ)
--->
-"""))
+[1] JA 
+[2] NEJ
+--> """))
                             if dodge_choice == 1: #Du försöker udvika
                                 dodge_chance=r.randint(1,3)
                                 if dodge_chance==3:
@@ -249,7 +249,7 @@ Du undviker honom och får ett till försök
                             elif dodge_choice == 2: #Du blir träffad även för att du struntade i att udvika
                                 player.hp=player.hp-heavy_attack
                                 print(f"""
-Du blir träffad och tar {heavy_attack}
+Du blir träffad och tar {heavy_attack} damage!
 """)
                                 break
                             else:
@@ -366,10 +366,10 @@ def Alternative():
             elif Answer == 3:
                 Menu()
             elif Answer < 1 or Answer > 3:
-                print("\n Fel! Ange ett giltigt tal 1-3")
+                print("\n Fel! Ange ett giltigt tal mellan [1], [2], [3].")
                 Alternative()
         except ValueError:
-            print("\n Fel! Ange ett giltigt tal 1-4")
+            print("\n Fel! Ange ett giltigt tal mellan [1], [2], [3].")
             Alternative()
     if player.hp <= 0: 
         dead()
@@ -392,10 +392,10 @@ def Menu():
                 break 
             else:
                 print(" ")
-                print("Ogiltigt val. Ange 1 eller 2")
+                print("Fel! Ange ett giltigt tal mellan [1], [2].")
         except ValueError:
             print(" ")
-            print("Fel! Ange ett giltigt tal 1-2")
+            print("Fel! Ange ett giltigt tal mellan [1], [2].")
 
 
 def Valt_rum():
@@ -410,7 +410,7 @@ Välj vilken dörr du vill öppna.
 Ange dörr: """))
         # Kontrollera om input är inom rätt intervall
         if g < 1 or g > 3:
-            print("\nFel! Ange ett tal mellan 1-3")
+            print("\nFel! Ange ett giltigt tal mellan [1], [2], [3].")
             Valt_rum()  # Anropa funktionen igen
         else:
             # Generera ett slumpmässigt rum
@@ -422,7 +422,7 @@ Ange dörr: """))
             elif random_tal == 3:
                 Room_chest()
     except ValueError:
-        print("\nFel! Ange ett giltigt tal 1-3")
+        print("\nFel! Ange ett giltigt tal mellan [1], [2], [3].")
         Valt_rum()  
 
 def dead():
