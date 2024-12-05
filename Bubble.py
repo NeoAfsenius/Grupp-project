@@ -75,7 +75,7 @@ def create_luckybraclet():
     return Item(0,0,2, "braclet")
 
 def create_unluckyboots():
-    return Item(0,0,0, "boots")
+    return Item(0,0,0, "boots") #vet att de inte gör något det är med mening
 
 player = input("Spelarens namn: ") 
 print(" ")
@@ -175,9 +175,7 @@ def Fight_monster():
       |   ||  ||   |
       |   ||  ||   |
       |_||_|  |_||_|
-
           
-
 Du möter ett monster!
 """)
     while monster_hp>0: #Säger att så länge monstret lever forstätter striden
@@ -217,7 +215,7 @@ Du gör {heavy_attack} damage på monstret
                 if monster_hp<=0:
                     continue
                 if monster_hp>0:
-                    
+
 
                     if monster_attack==1:
                         monster_light= r.randint(1+(player.level), 10+(player.level))
@@ -227,32 +225,36 @@ Monstret slår dig med en en snabb och lätt attack och skadar dig {monster_ligh
 """ )
                     elif monster_attack==2:
                         monster_heavy= r.randint(1+(2*player.level), 10+(2*player.level))
-                        
+
                     #Här får spelaren undvika om den har tur!
-                        try:
+                        while True:
                             dodge_choice=int(input("""
 Monstret slår dig med en tung och långsamm attack. Vill du undvika?
 [1] JA [2] NEJ)
 -->
 """))
                             if dodge_choice == 1: #Du försöker udvika
+                                dodge_chance=r.randint(1,3)
                                 if dodge_chance==3:
                                     monster_heavy = r.randint(1+(2*player.level), 10+(2*player.level)) # Du försöker udvika men tar skada nedan
                                     print(f"""
 Du försöker undvika men du blir träffad och tar {monster_heavy} damage
 """)
+                                    break
                                 elif dodge_chance<=3: #Du lyckas udvika honom
                                     print(f"""
 Du undviker honom och får ett till försök
 """)
-
+                                    break
                             elif dodge_choice == 2: #Du blir träffad även för att du struntade i att udvika
                                 player.hp=player.hp-heavy_attack
                                 print(f"""
 Du blir träffad och tar {heavy_attack}
 """)
-                        except ValueError:
-                            print("Du har inte valt mellan 1 och 2")
+                                break
+                            else:
+                                print("Inte [1] eller [2]")
+                  
             except ValueError:
                 print("Fel! Välj 1 eller 2.")
                 continue  # Hoppa över resten av loopen
