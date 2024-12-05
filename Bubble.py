@@ -15,7 +15,7 @@ class Spelare:
         print(f"\n \n \n \n HP: {self.hp}, STRENGTH: {self.str}, LUCK: {self.luck}, LEVEL: {self.level}")
   
     def add_to_inventory(self, item):
-        if len(self.inventory) <= 5:
+        if len(self.inventory) < 5:
             self.inventory.append(item)
             print(f"Du la till {item} i ditt inventory")
 
@@ -26,17 +26,20 @@ class Spelare:
             print("")
             
             Alternative()
-        else:
-            inventory_full()
-            self.inventory.append(item)
+        elif len(self.inventory) >= 5:
+            inventory_full(item)
             
             Alternative()
 
     def remove_from_inventory(self, item):
         if len(self.inventory) <= 5:
             self.inventory.remove(item)
-            print(f"Tog bort {item}ur inventoryt")
-            print("")
+            self.str -= item.str_bonus
+            self.hp -= item.hp_bonus
+            self.luck -= item.luck_bonus
+            
+            print(f"Tog bort {item}ur inventoryt\n")
+            
             Alternative()
         elif len(self.inventory) == 0: 
             print("Finns inga nuvarande items i ditt inventory")
@@ -79,25 +82,28 @@ print(" ")
 player = Spelare(100, 10, 1, 1, player)
 room_count = 0
 
-def inventory_full():
-    inventory_remove_check = input("Ditt inventory är fullt, ta bort ett item för att lägga till det nya\n [1] - Ta bort ett item \n[2] - Gå vidare")
-    chosen_removal = int(input("Vilket nummer på item vill du ta bort"))
-
+def inventory_full(item):
+    inventory_remove_check = input("Ditt inventory är fullt, ta bort ett item för att lägga till det nya\n[1] - Ta bort ett item \n[2] - Gå vidare \n")
+    
     if inventory_remove_check == "1":
-        player.show_inventory() #visar inventory
-        print("")
+        try:
+            player.show_inventory()
+            print("")
+            chosen_removal = input("Vilket nummer på item vill du ta bort")
+            
+            
 
-        if 1 <= chosen_removal <= len(player.inventory): #Om valet är mindre än 1 dvs index blir minus 1, eller om siffran blir större än största index så får man välja igen pga annars blir det index error
-            player.remove_from_inventory(player.inventory[chosen_removal-1])
+            if 1 <= eval(chosen_removal) <= len(player.inventory): #Om valet är mindre än 1 dvs index blir minus 1, eller om siffran blir större än största index så får man välja igen pga annars blir det index error
+                player.remove_from_inventory(player.inventory[chosen_removal-1])
+                player.add_to_inventory(item)
 
-            #Gå tillbaka till lägga till item
-
-        else:
+        except ValueError:
             print("Error, Försök igen")
             inventory_full()
+
     elif inventory_remove_check == "2":
         Alternative()
-    elif inventory_remove_check != "1" or inventory_remove_check != "2":
+    elif inventory_remove_check != "1" and inventory_remove_check != "2":
         print("Error, skriv in 1 eller 2")
 
     
