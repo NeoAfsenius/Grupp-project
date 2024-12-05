@@ -60,7 +60,7 @@ class Item:
     def __str__(self):
         return f"{self.name} (STR: {self.str_bonus}, HP: {self.hp_bonus}, LUCK: {self.luck_bonus})"
 def create_sword():
-    return Item(r.randint(1,4),r.randint(1,10),0,"sword")
+    return Item(r.randint(1,10),r.randint(1,10),0,"sword")
 
 def create_belt():
     return Item(3,0,0, "belt")
@@ -145,9 +145,14 @@ eller kistor med loot som hjälper dig att gå vidare.
         Alternative()
     elif starta == 2:
         print("hejdå")
+    else:
+        print("Error, välj [1] eller [2]")
 
 def Fight_monster():
     monster_hp=r.randint(50 + (10 * player.level), 100 + (10 * player.level)) #Skapar monstrets hp
+    monster_attack = r.randint(1,2)
+    dodge_chance=r.randint(1,3)
+
     print("""
        ____  ____
      /          o  
@@ -202,9 +207,9 @@ Du gör {heavy_attack} damage på monstret
 
                 #Här börjar monstrets attack!
                 if monster_hp<=0:
-                    break
+                    continue
                 if monster_hp>0:
-                    monster_attack = r.randint(1,2)
+                    
 
                     if monster_attack==1:
                         monster_light= r.randint(1+(player.level), 10+(player.level))
@@ -216,45 +221,52 @@ Monstret slår dig med en en snabb och lätt attack och skadar dig {monster_ligh
                         monster_heavy= r.randint(1+(2*player.level), 10+(2*player.level))
                         
                     #Här får spelaren undvika om den har tur!
-                        while True:
+                        try:
                             dodge_choice=int(input("""
 Monstret slår dig med en tung och långsamm attack. Vill du undvika?
 [1] JA [2] NEJ)
 -->
 """))
                             if dodge_choice == 1: #Du försöker udvika
-                                dodge_chance=r.randint(1,3)
                                 if dodge_chance==3:
                                     monster_heavy = r.randint(1+(2*player.level), 10+(2*player.level)) # Du försöker udvika men tar skada nedan
                                     print(f"""
 Du försöker undvika men du blir träffad och tar {monster_heavy} damage
 """)
-                                    break
                                 elif dodge_chance<=3: #Du lyckas udvika honom
                                     print(f"""
 Du undviker honom och får ett till försök
 """)
-                                    break
+
                             elif dodge_choice == 2: #Du blir träffad även för att du struntade i att udvika
                                 player.hp=player.hp-heavy_attack
                                 print(f"""
 Du blir träffad och tar {heavy_attack}
 """)
-                                break
-                            else:
-                                print("Inte [1] eller [2]")
+                        except ValueError:
+                            print("Du har inte valt mellan 1 och 2")
             except ValueError:
                 print("Fel! Välj 1 eller 2.")
                 continue  # Hoppa över resten av loopen
-    if monster_hp<=0:
-        lucky_number = r.randint(1,7)
-        print("Du vann över monstret och gick upp i Level och din str gick upp 2 enheter")
-        player.level+=1
-        player.str+=2
-        if lucky_number%7==0:
-            player.luck+=1
-            print("Du har tur och fick även +1 luck när du levlade upp!")
-        Alternative()
+            if monster_hp<=0:
+                lucky_number = r.randint(1,7)
+                print("Du vann över monstret och gick upp i Level och din str gick upp 2 enheter")
+                player.level+=1
+                player.str+=2
+                if lucky_number%7==0:
+                    player.luck+=1
+                    print("Du har tur och fick även +1 luck när du levlade upp!")
+                Alternative()
+    try:
+        dead = int(input("Vill du börja om? [1] JA [2] NEJ\n-> "))
+        if dead == 1:
+            game_intro()
+        elif dead == 2:
+            print("Du avslutade spelet.")
+        else:
+            print("Fel! Välj 1 eller 2.")
+    except ValueError:
+        print("Fel! Välj 1 eller 2.")
         # Detta nedan är gammalt spel om man vill ha
         # if monster_damage >= player.str:
         #     player.hp = player.hp-2*monster_damage
