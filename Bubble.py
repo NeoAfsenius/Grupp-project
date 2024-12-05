@@ -15,7 +15,7 @@ class Spelare:
         print(f"\n \n \n \n HP: {self.hp}, STRENGTH: {self.str}, LUCK: {self.luck}, LEVEL: {self.level}")
   
     def add_to_inventory(self, item):
-        if len(self.inventory) < 5:
+        if len(self.inventory) <= 5:
             self.inventory.append(item)
             print(f"Du la till {item} i ditt inventory")
 
@@ -361,7 +361,10 @@ def Room_trap():
 
 # ALTERNATIV 
 def Alternative():
-    if player.hp > 0:
+    if player.level == 10:
+        print("Grattis du klarade dig till level 5 och klarade spelet!")
+        vinnare()
+    elif player.hp > 0:
         player.player_stats()
         print(" \n [1] - Välj mellan 3 dörrar \n [2] - Öppna inventory \n [3] - Meny \n ")
         try:
@@ -442,5 +445,21 @@ def dead():
             print("Hejdå")
     except ValueError:
         print("Välj mellan 1 eller 2")
+
+
+def vinnare():
+    play_again = int(input("Vill du spela igen? \n[1] - Ja \n[2] - Nej\n--> "))
+    try:
+        if play_again == 1:
+            print("Startar spelet..")
+            game_intro()
+        elif play_again == 2:
+            print("Avslutar spelet..")
+        elif play_again < 1 or play_again > 2:
+            print("Fel! Välj mellan [1] eller [2].")
+            vinnare()
+    except ValueError:
+        print("Fel! Välj mellan [1] eller [2].")
+        vinnare()
 
 game_intro()
