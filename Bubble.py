@@ -249,7 +249,7 @@ Du blir träffad och tar {heavy_attack}
             except ValueError:
                 print("Fel! Välj 1 eller 2.")
                 continue  # Hoppa över resten av loopen
-    if monster_hp<=0:
+    if monster_hp<=0: #kollar om monstret är dött
         lucky_number = r.randint(1,7)
         print("Du vann över monstret och gick upp i Level och din str gick upp 2 enheter")
         player.level+=1
@@ -258,7 +258,7 @@ Du blir träffad och tar {heavy_attack}
             player.luck+=1
             print("Du har tur och fick även +1 luck när du levlade upp!")
         Alternative()
-    if player.hp <0:
+    elif player.hp <0: #Kollar om man är död
         try:
             dead = int(input("Vill du börja om? [1] JA [2] NEJ\n-> "))
             if dead == 1:
@@ -269,25 +269,6 @@ Du blir träffad och tar {heavy_attack}
                 print("Fel! Välj 1 eller 2.")
         except ValueError:
             print("Fel! Välj 1 eller 2.")
-        # Detta nedan är gammalt spel om man vill ha
-        # if monster_damage >= player.str:
-        #     player.hp = player.hp-2*monster_damage
-        #     print("Du förlorade och tog skada")
-        #     print(f"Du har nu {player.hp} Hp")
-        #     print("")
-        #     Alternative()
-        # elif monster_damage == player.str:
-        #     print("Ni är lika starka, du går vidare")
-        #     Alternative()
-        # if monster_damage <= player.str:
-        #     player.level = player.level + 1
-        #     player.str= player.str + 2
-        #     lucky_number = r.randint(1,7)
-        #     print("Du vann över monstret och gick upp i Level och din str gick upp 2 enheter")
-        #     if lucky_number%7==0:
-        #         player.luck=+ 1
-        #         print("Du har tur och fick även +1 luck när du levlade upp!")
-        #     Alternative()
 
 def Escape_monster():
     tempo_luck = player.luck #Gör så att luck sparas och så att det inte blir problem senare för att luck är över 9
