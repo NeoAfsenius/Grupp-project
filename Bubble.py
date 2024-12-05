@@ -15,7 +15,7 @@ class Spelare:
         print(f"\n \n \n \n HP: {self.hp}, STRENGTH: {self.str}, LUCK: {self.luck}, LEVEL: {self.level}")
   
     def add_to_inventory(self, item):
-        if len(self.inventory) < 5:
+        if len(self.inventory) <= 5:
             self.inventory.append(item)
             print(f"Du la till {item} i ditt inventory")
 
