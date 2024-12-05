@@ -28,8 +28,8 @@ class Spelare:
             Alternative()
         else:
             inventory_full()
-
-            print("")
+            self.inventory.append(item)
+            
             Alternative()
 
     def remove_from_inventory(self, item):
@@ -184,6 +184,7 @@ Vad vill du göra:
 Du gör en lätt attack på honom och skadar honom {light_attack}hp
 """)
                     monster_hp = monster_hp-light_attack
+
                 elif player_choice ==2: #startar hård attack
                     heavy_attack = r.randint(40+(player.str),50+(player.str)) #bestämmer damage
                     attack_chance=r.randint(1,3) #ger odds att man träffar
@@ -364,7 +365,7 @@ def Alternative():
             print("\n Fel! Ange ett giltigt tal 1-4")
             Alternative()
     if player.hp <= 0: 
-        print("Du förlorade!")
+        dead()
 
 # MENYN
 def Menu():
@@ -422,7 +423,7 @@ def dead():
     val=int(input("Vill du fortsätta [1] Ja [2] Nej"))
     try:
         if val==1:
-            game_intro
+            game_intro()
         elif val==2:
             print("Hejdå")
     except ValueError:
