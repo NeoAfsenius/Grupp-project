@@ -335,8 +335,8 @@ def Room_chest():
 def Room_trap():
     print("Du öppnar dörren, och blir tagen i en fälla.\n ")
     damage = r.randint(5,20)/player.luck
-    player.hp -= damage
-    print(f"Du tog {damage} i skada")
+    player.hp -= round(damage)
+    print(f"Du tog {round(damage)} i skada")
     print(f"Du har nu {player.hp} hp kvar!")
     Alternative()
 
