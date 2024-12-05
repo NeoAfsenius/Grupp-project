@@ -372,7 +372,7 @@ def Alternative():
             print("\n Fel! Ange ett giltigt tal 1-4")
             Alternative()
     if player.hp <= 0: 
-        print("Du förlorade!")
+        dead()
 
 # MENYN
 def Menu():
@@ -430,7 +430,7 @@ def dead():
     val=int(input("Vill du fortsätta [1] Ja [2] Nej"))
     try:
         if val==1:
-            game_intro
+            game_intro()
         elif val==2:
             print("Hejdå")
     except ValueError:
