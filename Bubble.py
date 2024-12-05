@@ -15,25 +15,32 @@ class Spelare:
         print(f"\n \n \n \n HP: {self.hp}, STRENGTH: {self.str}, LUCK: {self.luck}, LEVEL: {self.level}")
   
     def add_to_inventory(self, item):
-        if len(self.inventory) < 5:
+        if len(self.inventory) < 5: #Under 5 för att den kollar om det är fullt efter man har lagt till itemet, annars skulle 6 vara max items
+
+            #Lägger till i inventory
             self.inventory.append(item)
             print(f"Du la till {item} i ditt inventory")
 
+            #Lägger till statsen
             self.str += item.str_bonus
             self.hp += item.hp_bonus
             self.luck += item.luck_bonus
 
             print("")
-            
             Alternative()
         elif len(self.inventory) >= 5:
+
+            #Om fullt inventory så använder den tidigare item argumentet igen, och därför kan lägga till samma item
             inventory_full(item)
-            
             Alternative()
 
     def remove_from_inventory(self, item):
-        if len(self.inventory) <= 5:
+        if len(self.inventory) >= 5:
+
+            #tar bort item:et
             self.inventory.remove(item)
+
+            #Tar bort dess stats
             self.str -= item.str_bonus
             self.hp -= item.hp_bonus
             self.luck -= item.luck_bonus
@@ -62,7 +69,9 @@ class Item:
     #Gör så att itemnamnet kan läsas av,
     def __str__(self):
         return f"{self.name} (STR: {self.str_bonus}, HP: {self.hp_bonus}, LUCK: {self.luck_bonus})"
+    
 def create_sword():
+    #När man kallar funktionen så returneras items 
     return Item(r.randint(1,10),r.randint(1,10),0,"sword")
 
 def create_belt():
@@ -78,23 +87,22 @@ def create_unluckyboots():
     return Item(0,0,0, "boots") #vet att de inte gör något det är med mening
 
 player = input("Spelarens namn: ") 
-print(" ")
+print("")
 player = Spelare(100, 10, 1, 1, player)
-room_count = 0
 
 def inventory_full(item):
     inventory_remove_check = input("Ditt inventory är fullt, ta bort ett item för att lägga till det nya\n[1] - Ta bort ett item \n[2] - Gå vidare \n")
     
     if inventory_remove_check == "1":
-        try:
+        try: #Om det blir error så fixas det under
             player.show_inventory()
             print("")
             chosen_removal = input("Vilket nummer på item vill du ta bort")
             
             
-
+            #Eval() räknar ut vad stringen är som int, och därför kan man jämföra med talet 1 och len()
             if 1 <= eval(chosen_removal) <= len(player.inventory): #Om valet är mindre än 1 dvs index blir minus 1, eller om siffran blir större än största index så får man välja igen pga annars blir det index error
-                player.remove_from_inventory(player.inventory[chosen_removal-1])
+                player.remove_from_inventory(player.inventory[chosen_removal-1]) #-1 för att få rätt index från nummerlista
                 player.add_to_inventory(item)
 
         except ValueError:
@@ -344,7 +352,7 @@ def Room_chest():
 def Room_trap():
     print("Du öppnar dörren, och blir tagen i en fälla.\n ")
     damage = r.randint(5,20)/player.luck
-    player.hp -= round(damage)
+    player.hp -= round(damage) #Avrundar damage så att det inte blir massa decimaler
     print(f"Du tog {round(damage)} i skada")
     print(f"Du har nu {player.hp} hp kvar!")
     Alternative()
