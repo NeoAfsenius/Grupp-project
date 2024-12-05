@@ -184,12 +184,12 @@ Vad vill du göra:
 Du gör en lätt attack på honom och skadar honom {light_attack}hp
 """)
                     monster_hp = monster_hp-light_attack
-                elif player_choice ==2:
-                    heavy_attack = r.randint(40+(player.str),50+(player.str))
-                    attack_chance=r.randint(1,5)
-                    if attack_chance==5:
+                elif player_choice ==2: #startar hård attack
+                    heavy_attack = r.randint(40+(player.str),50+(player.str)) #bestämmer damage
+                    attack_chance=r.randint(1,3) #ger odds att man träffar
+                    if attack_chance==3: #gör att man missar 33% av gångerna
                         print("Du slår hårt men missar! ")
-                    elif attack_chance<5:
+                    elif attack_chance<3: #Gör att du träffar 66% 
                         print(f"""
 Du slår hårt och och träffar.
 Du gör {heavy_attack} damage på monstret
@@ -204,6 +204,7 @@ Du gör {heavy_attack} damage på monstret
                     continue
                 if monster_hp>0:
                     monster_attack = r.randint(1,2)
+
                     if monster_attack==1:
                         monster_light= r.randint(1+(player.level), 10+(player.level))
                         player.hp=player.hp-monster_light
@@ -220,19 +221,19 @@ Monstret slår dig med en tung och långsamm attack. Vill du undvika?
 [1] JA [2] NEJ)
 -->
 """))
-                            if dodge_choice == 1:
-                                dodge_chance=r.randint(1,5)
-                                if dodge_chance==5:
-                                    monster_heavy = r.randint(1+(2*player.level), 10+(2*player.level))
+                            if dodge_choice == 1: #Du försöker udvika
+                                dodge_chance=r.randint(1,3)
+                                if dodge_chance==3:
+                                    monster_heavy = r.randint(1+(2*player.level), 10+(2*player.level)) # Du försöker udvika men tar skada nedan
                                     print(f"""
 Du försöker undvika men du blir träffad och tar {monster_heavy} damage
 """)
-                                elif dodge_chance<=5:
+                                elif dodge_chance<=3: #Du lyckas udvika honom
                                     print(f"""
 Du undviker honom och får ett till försök
 """)
 
-                            elif dodge_choice == 2:
+                            elif dodge_choice == 2: #Du blir träffad även för att du struntade i att udvika
                                 player.hp=player.hp-heavy_attack
                                 print(f"""
 Du blir träffad och tar {heavy_attack}
