@@ -147,7 +147,7 @@ eller kistor med loot som hjälper dig att gå vidare.
         print("hejdå")
     elif starta != 1 and starta != 2:
         print("Error, välj [1] eller [2]")
-        starta = int(input("Vill starta spelet \n [1] - Ja \n [2] - Nej \n \n Ange ditt val: "))
+        starta = input("Vill starta spelet \n [1] - Ja \n [2] - Nej \n \n Ange ditt val: ")
 
 def Fight_monster():
     monster_hp=r.randint(50 + (10 * player.level), 100 + (10 * player.level)) #Skapar monstrets hp
