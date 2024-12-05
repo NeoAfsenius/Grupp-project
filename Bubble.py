@@ -248,25 +248,26 @@ Du blir träffad och tar {heavy_attack}
             except ValueError:
                 print("Fel! Välj 1 eller 2.")
                 continue  # Hoppa över resten av loopen
-            if monster_hp<=0:
-                lucky_number = r.randint(1,7)
-                print("Du vann över monstret och gick upp i Level och din str gick upp 2 enheter")
-                player.level+=1
-                player.str+=2
-                if lucky_number%7==0:
-                    player.luck+=1
-                    print("Du har tur och fick även +1 luck när du levlade upp!")
-                Alternative()
-    try:
-        dead = int(input("Vill du börja om? [1] JA [2] NEJ\n-> "))
-        if dead == 1:
-            game_intro()
-        elif dead == 2:
-            print("Du avslutade spelet.")
-        else:
+    if monster_hp<=0:
+        lucky_number = r.randint(1,7)
+        print("Du vann över monstret och gick upp i Level och din str gick upp 2 enheter")
+        player.level+=1
+        player.str+=2
+        if lucky_number%7==0:
+            player.luck+=1
+            print("Du har tur och fick även +1 luck när du levlade upp!")
+        Alternative()
+    if player.hp <0:
+        try:
+            dead = int(input("Vill du börja om? [1] JA [2] NEJ\n-> "))
+            if dead == 1:
+                game_intro()
+            elif dead == 2:
+                print("Du avslutade spelet.")
+            else:
+                print("Fel! Välj 1 eller 2.")
+        except ValueError:
             print("Fel! Välj 1 eller 2.")
-    except ValueError:
-        print("Fel! Välj 1 eller 2.")
         # Detta nedan är gammalt spel om man vill ha
         # if monster_damage >= player.str:
         #     player.hp = player.hp-2*monster_damage
