@@ -236,11 +236,11 @@ Monstret slår dig med en en snabb och lätt attack och skadar dig {monster_ligh
 
                     #Här får spelaren undvika om den har tur!
                         while True:
-                            dodge_choice=int(input("""
+                            dodge_choice=input("""
 Monstret slår dig med en tung och långsamm attack. Vill du undvika?
 [1] JA 
 [2] NEJ
---> """))
+--> """)
                             if dodge_choice == 1: #Du försöker udvika
                                 dodge_chance=r.randint(1,3)
                                 if dodge_chance==3:
